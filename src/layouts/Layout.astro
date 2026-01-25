@@ -1,0 +1,58 @@
+---
+const { title, description, keywords } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    
+    <!-- Structured Data (传递给子页面) -->
+    <slot name="structured-data" />
+    
+    <!-- Tailwind CSS CDN (生产环境建议本地安装) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <nav class="bg-white shadow-sm border-b">
+      <div class="max-w-6xl mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <a href="/" class="text-xl font-bold text-gray-900">🛠️ ToolSite</a>
+          <div class="flex gap-4">
+            <a href="/tools/json-to-csv" class="text-gray-600 hover:text-gray-900">JSON to CSV</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <main class="min-h-screen py-8">
+      <slot />
+    </main>
+    
+    <footer class="bg-white border-t mt-16">
+      <div class="max-w-6xl mx-auto px-4 py-8 text-center text-gray-600">
+        <p>© 2026 ToolSite - Free Online Tools</p>
+      </div>
+    </footer>
+  </body>
+</html>
+

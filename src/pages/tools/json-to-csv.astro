@@ -1,0 +1,345 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// 配置数据（未来可抽成 JSON）
+const config = {
+  slug: 'json-to-csv',
+  title: 'JSON to CSV Converter – Convert JSON to CSV Online Free',
+  description: 'Convert JSON to CSV online for free. Paste your JSON array and instantly download as CSV file. Supports nested JSON, Python JSON, and Excel formats. No signup required.',
+  keywords: 'json to csv, convert json to csv, json to csv converter, json file to csv, nested json to csv, json to csv online, json to csv python, convert json to csv free',
+};
+
+// FAQ Schema (结构化数据)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I convert nested JSON to CSV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Our tool handles nested JSON objects. Nested fields will be flattened in the CSV output with dot notation (e.g., user.name)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to convert JSON to CSV in Python?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While you can use Python's csv and json modules, our online tool is faster for quick conversions without writing code."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert JSON file to CSV?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Simply open your JSON file, copy its contents, and paste into our converter."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to convert JSON to CSV in Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use our tool to convert JSON to CSV format first, then open the downloaded CSV file directly in Excel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this JSON to CSV converter free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! 100% free, no signup required, unlimited conversions. All processing happens in your browser."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={config.title} description={config.description} keywords={config.keywords}>
+  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <div class="max-w-4xl mx-auto px-4">
+    <!-- 标题区 -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-3">
+        📊 {config.title.split(' - ')[0]}
+      </h1>
+      <p class="text-lg text-gray-600">
+        {config.description.split('.')[0]}. Fast, secure, and completely free.
+      </p>
+    </div>
+
+    <!-- 工具主体 -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <!-- 输入区 -->
+      <div class="mb-6">
+        <label for="json-input" class="block text-sm font-semibold text-gray-700 mb-2">
+          📝 Paste your JSON array here:
+        </label>
+        <textarea
+          id="json-input"
+          class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
+          placeholder='[{"name":"Alice","age":30,"city":"New York"},{"name":"Bob","age":25,"city":"London"}]'
+        ></textarea>
+        <p class="text-xs text-gray-500 mt-1">
+          💡 Tip: Works with nested JSON, JSON files, and arrays from Python/JavaScript
+        </p>
+      </div>
+
+      <!-- 按钮组 -->
+      <div class="flex gap-3 mb-6">
+        <button
+          id="convert-btn"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md"
+        >
+          ⚡ Convert to CSV
+        </button>
+        <button
+          id="clear-btn"
+          class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+        >
+          🗑️ Clear
+        </button>
+      </div>
+
+      <!-- 输出区 -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          📄 CSV Output:
+        </label>
+        <textarea
+          id="csv-output"
+          class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
+          readonly
+          placeholder="Your CSV output will appear here..."
+        ></textarea>
+      </div>
+
+      <!-- 下载按钮 -->
+      <button
+        id="download-btn"
+        class="mt-4 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-md hidden"
+      >
+        ⬇️ Download CSV File
+      </button>
+    </div>
+
+    <!-- 使用说明 -->
+    <div class="bg-blue-50 rounded-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        How to Convert JSON to CSV?
+      </h2>
+      <ol class="list-decimal list-inside space-y-2 text-gray-700">
+        <li><strong>Paste your JSON array</strong> into the input box above</li>
+        <li><strong>Click "Convert to CSV"</strong> button</li>
+        <li><strong>Download the CSV file</strong> or copy the output</li>
+        <li><strong>Use in Excel, Google Sheets</strong>, or any CSV-compatible tool</li>
+      </ol>
+    </div>
+
+    <!-- Example 示例区（SEO 加速器） -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        Example: Convert JSON to CSV
+      </h2>
+      
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Input JSON:</h3>
+          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>{`[
+  {"name": "Alice", "age": 30, "city": "New York"},
+  {"name": "Bob", "age": 25, "city": "London"}
+]`}</code></pre>
+        </div>
+
+        <div class="text-center text-gray-400 text-2xl">↓</div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Output CSV:</h3>
+          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>{`"name","age","city"
+"Alice","30","New York"
+"Bob","25","London"`}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ / 长尾词覆盖 -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        Frequently Asked Questions
+      </h2>
+      
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            Can I convert nested JSON to CSV?
+          </h3>
+          <p class="text-gray-600">
+            Yes! Our tool handles nested JSON objects. Nested fields will be flattened in the CSV output.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            How to convert JSON to CSV in Python?
+          </h3>
+          <p class="text-gray-600">
+            While you can use Python's csv and json modules, our online tool is faster for quick conversions without writing code.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            Can I convert JSON file to CSV?
+          </h3>
+          <p class="text-gray-600">
+            Yes! Simply open your JSON file, copy its contents, and paste into our converter.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            How to convert JSON to CSV in Excel?
+          </h3>
+          <p class="text-gray-600">
+            Use our tool to convert JSON to CSV format first, then open the downloaded CSV file directly in Excel.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            Is this JSON to CSV converter free?
+          </h3>
+          <p class="text-gray-600">
+            Yes! 100% free, no signup required, unlimited conversions. All processing happens in your browser.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 相关工具（内链准备） -->
+    <div class="bg-gray-100 rounded-lg p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">
+        Related Tools
+      </h2>
+      <div class="flex gap-3">
+        <span class="text-gray-500">CSV to JSON (Coming Soon)</span>
+        <span class="text-gray-300">•</span>
+        <span class="text-gray-500">JWT Decode (Coming Soon)</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JSON to CSV 转换逻辑（支持 nested JSON）
+    const convertBtn = document.getElementById('convert-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const downloadBtn = document.getElementById('download-btn');
+    const jsonInput = document.getElementById('json-input') as HTMLTextAreaElement;
+    const csvOutput = document.getElementById('csv-output') as HTMLTextAreaElement;
+
+    // Flatten nested objects (一层扁平化)
+    function flattenObject(obj: any, prefix = ''): any {
+      const flattened: any = {};
+      
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          const value = obj[key];
+          const newKey = prefix ? `${prefix}.${key}` : key;
+          
+          if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+            // 嵌套对象：扁平化一层
+            Object.assign(flattened, flattenObject(value, newKey));
+          } else if (Array.isArray(value)) {
+            // 数组：转为 JSON 字符串
+            flattened[newKey] = JSON.stringify(value);
+          } else {
+            // 基本类型
+            flattened[newKey] = value;
+          }
+        }
+      }
+      
+      return flattened;
+    }
+
+    convertBtn?.addEventListener('click', () => {
+      const input = jsonInput.value.trim();
+      
+      if (!input) {
+        csvOutput.value = 'Error: Please paste JSON data first';
+        downloadBtn?.classList.add('hidden');
+        return;
+      }
+
+      try {
+        const arr = JSON.parse(input);
+        
+        if (!Array.isArray(arr)) {
+          throw new Error('Input must be a JSON array (e.g., [{...}, {...}])');
+        }
+        
+        if (arr.length === 0) {
+          throw new Error('JSON array is empty');
+        }
+
+        // 扁平化所有对象
+        const flattenedArr = arr.map(obj => flattenObject(obj));
+
+        // 提取所有可能的键（处理不一致的对象结构）
+        const allKeys = new Set<string>();
+        flattenedArr.forEach(obj => {
+          if (typeof obj === 'object' && obj !== null) {
+            Object.keys(obj).forEach(key => allKeys.add(key));
+          }
+        });
+
+        const keys = Array.from(allKeys);
+        
+        // 生成 CSV 头部
+        const header = keys.map(k => `"${k}"`).join(',');
+        
+        // 生成 CSV 行
+        const rows = flattenedArr.map(obj => {
+          return keys.map(key => {
+            const value = obj[key];
+            if (value === null || value === undefined) return '""';
+            const strValue = String(value);
+            // 转义双引号并包裹在引号中
+            return `"${strValue.replace(/"/g, '""')}"`;
+          }).join(',');
+        });
+
+        const csv = [header, ...rows].join('\n');
+        csvOutput.value = csv;
+        downloadBtn?.classList.remove('hidden');
+
+        // 设置下载功能
+        downloadBtn!.onclick = () => {
+          const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'converted.csv';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        };
+
+      } catch (e) {
+        csvOutput.value = `Error: ${(e as Error).message}\n\nPlease check your JSON format.`;
+        downloadBtn?.classList.add('hidden');
+      }
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      jsonInput.value = '';
+      csvOutput.value = '';
+      downloadBtn?.classList.add('hidden');
+    });
+  </script>
+</Layout>
+
