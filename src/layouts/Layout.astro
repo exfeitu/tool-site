@@ -20,6 +20,15 @@ const { title, description, keywords } = Astro.props;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4CN4VLSYPY"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4CN4VLSYPY');
+    </script>
+    
     <!-- Structured Data (传递给子页面) -->
     <slot name="structured-data" />
     
