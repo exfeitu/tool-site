@@ -1,0 +1,348 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// 配置数据
+const config = {
+  slug: 'json-beautifier',
+  title: 'JSON Beautifier – Format & Beautify JSON Online Free',
+  description: 'Beautify and format JSON online for free. Paste your minified JSON and instantly get formatted, readable output. Supports validation, minify, and syntax highlighting. No signup required.',
+  keywords: 'json beautifier, json formatter, json pretty print, format json online, beautify json, json validator, json minify, json viewer, pretty json',
+};
+
+// FAQ Schema (结构化数据)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How to beautify JSON online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Simply paste your minified or unformatted JSON into our beautifier. It will instantly format and indent your JSON with proper spacing and line breaks for better readability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is JSON beautifier?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A JSON beautifier (also called JSON formatter or pretty printer) is a tool that formats minified JSON into a readable structure with proper indentation and line breaks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I validate JSON with this tool?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! Our JSON beautifier automatically validates your JSON and shows clear error messages if the JSON is invalid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to minify JSON?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the 'Minify' button to remove all whitespace and line breaks from your JSON, making it compact for production use."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this JSON formatter free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! 100% free, no signup required, unlimited formatting. All processing happens locally in your browser for security."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={config.title} description={config.description} keywords={config.keywords}>
+  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <div class="max-w-4xl mx-auto px-4">
+    <!-- 标题区 -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-3">
+        ✨ JSON Beautifier
+      </h1>
+      <p class="text-lg text-gray-600">
+        Format and beautify JSON instantly. Make your JSON readable with proper indentation. Fast, secure, and completely free.
+      </p>
+    </div>
+
+    <!-- 工具主体 -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <!-- 输入区 -->
+      <div class="mb-6">
+        <label for="json-input" class="block text-sm font-semibold text-gray-700 mb-2">
+          📝 Paste your JSON here:
+        </label>
+        <textarea
+          id="json-input"
+          class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
+          placeholder='{"name":"John","age":30,"city":"New York"}'
+        ></textarea>
+        <p class="text-xs text-gray-500 mt-1">
+          💡 Tip: Works with minified JSON, API responses, and config files
+        </p>
+      </div>
+
+      <!-- 按钮组 -->
+      <div class="flex gap-3 mb-6">
+        <button
+          id="beautify-btn"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md"
+        >
+          ✨ Beautify JSON
+        </button>
+        <button
+          id="minify-btn"
+          class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-md"
+        >
+          🗜️ Minify JSON
+        </button>
+        <button
+          id="clear-btn"
+          class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+        >
+          🗑️ Clear
+        </button>
+      </div>
+
+      <!-- 输出区 -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          📄 Formatted Output:
+        </label>
+        <textarea
+          id="json-output"
+          class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
+          readonly
+          placeholder="Your formatted JSON will appear here..."
+        ></textarea>
+      </div>
+
+      <!-- 复制按钮 -->
+      <button
+        id="copy-btn"
+        class="mt-4 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-md hidden"
+      >
+        📋 Copy to Clipboard
+      </button>
+
+      <!-- 错误提示 -->
+      <div id="error-output" class="hidden mt-4 p-4 bg-red-50 border-2 border-red-200 rounded-lg text-red-700"></div>
+    </div>
+
+    <!-- 使用说明 -->
+    <div class="bg-blue-50 rounded-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        How to Use JSON Beautifier?
+      </h2>
+      <ol class="list-decimal list-inside space-y-2 text-gray-700">
+        <li><strong>Paste your JSON</strong> into the input box above</li>
+        <li><strong>Click "Beautify JSON"</strong> to format with indentation</li>
+        <li><strong>Click "Minify JSON"</strong> to compress (remove whitespace)</li>
+        <li><strong>Copy the result</strong> and use in your project</li>
+      </ol>
+    </div>
+
+    <!-- Example 示例区 -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        Example: Beautify JSON
+      </h2>
+      
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Input (Minified JSON):</h3>
+          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>{`{"name":"John","age":30,"city":"New York","hobbies":["reading","coding"]}`}</code></pre>
+        </div>
+
+        <div class="text-center text-gray-400 text-2xl">↓</div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Output (Beautified JSON):</h3>
+          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>{`{
+  "name": "John",
+  "age": 30,
+  "city": "New York",
+  "hobbies": [
+    "reading",
+    "coding"
+  ]
+}`}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ / 长尾词覆盖 -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        Frequently Asked Questions
+      </h2>
+      
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            How to beautify JSON online?
+          </h3>
+          <p class="text-gray-600">
+            Simply paste your minified or unformatted JSON into our beautifier. It will instantly format and indent your JSON with proper spacing and line breaks for better readability.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            What is JSON beautifier?
+          </h3>
+          <p class="text-gray-600">
+            A JSON beautifier (also called JSON formatter or pretty printer) is a tool that formats minified JSON into a readable structure with proper indentation and line breaks.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            Can I validate JSON with this tool?
+          </h3>
+          <p class="text-gray-600">
+            Yes! Our JSON beautifier automatically validates your JSON and shows clear error messages if the JSON is invalid.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            How to minify JSON?
+          </h3>
+          <p class="text-gray-600">
+            Use the 'Minify' button to remove all whitespace and line breaks from your JSON, making it compact for production use.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            Is this JSON formatter free?
+          </h3>
+          <p class="text-gray-600">
+            Yes! 100% free, no signup required, unlimited formatting. All processing happens locally in your browser for security.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            What is JSON pretty print?
+          </h3>
+          <p class="text-gray-600">
+            JSON pretty print is another term for JSON beautification. It means formatting JSON with proper indentation and line breaks to make it human-readable.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">
+            Can I use this as a JSON viewer?
+          </h3>
+          <p class="text-gray-600">
+            Yes! Our tool works as a JSON viewer, allowing you to paste and view JSON in a formatted, easy-to-read structure.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 相关工具（内链） -->
+    <div class="bg-gray-100 rounded-lg p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">
+        Related Tools
+      </h2>
+      <div class="flex gap-3 flex-wrap">
+        <a href="/tools/json-to-csv" class="text-blue-600 hover:text-blue-800 font-medium">JSON to CSV</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/jwt-decode" class="text-blue-600 hover:text-blue-800 font-medium">JWT Decode</a>
+        <span class="text-gray-300">•</span>
+        <span class="text-gray-500">Base64 Encode (Coming Soon)</span>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    // JSON Beautifier 逻辑
+    const beautifyBtn = document.getElementById('beautify-btn');
+    const minifyBtn = document.getElementById('minify-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const jsonInput = document.getElementById('json-input');
+    const jsonOutput = document.getElementById('json-output');
+    const errorOutput = document.getElementById('error-output');
+
+    beautifyBtn?.addEventListener('click', () => {
+      const input = jsonInput.value.trim();
+      
+      if (!input) {
+        showError('Please paste JSON first');
+        return;
+      }
+
+      try {
+        // Parse and beautify with 2-space indentation
+        const parsed = JSON.parse(input);
+        const beautified = JSON.stringify(parsed, null, 2);
+        
+        jsonOutput.value = beautified;
+        copyBtn?.classList.remove('hidden');
+        errorOutput.classList.add('hidden');
+
+      } catch (e) {
+        showError(`Invalid JSON: ${e.message}\n\nPlease check your JSON syntax.`);
+      }
+    });
+
+    minifyBtn?.addEventListener('click', () => {
+      const input = jsonInput.value.trim();
+      
+      if (!input) {
+        showError('Please paste JSON first');
+        return;
+      }
+
+      try {
+        // Parse and minify (no spacing)
+        const parsed = JSON.parse(input);
+        const minified = JSON.stringify(parsed);
+        
+        jsonOutput.value = minified;
+        copyBtn?.classList.remove('hidden');
+        errorOutput.classList.add('hidden');
+
+      } catch (e) {
+        showError(`Invalid JSON: ${e.message}\n\nPlease check your JSON syntax.`);
+      }
+    });
+
+    copyBtn?.addEventListener('click', () => {
+      jsonOutput.select();
+      document.execCommand('copy');
+      
+      // Visual feedback
+      const originalText = copyBtn.textContent;
+      copyBtn.textContent = '✅ Copied!';
+      setTimeout(() => {
+        copyBtn.textContent = originalText;
+      }, 2000);
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      jsonInput.value = '';
+      jsonOutput.value = '';
+      copyBtn?.classList.add('hidden');
+      errorOutput.classList.add('hidden');
+    });
+
+    function showError(message) {
+      errorOutput.textContent = message;
+      errorOutput.classList.remove('hidden');
+      jsonOutput.value = '';
+      copyBtn?.classList.add('hidden');
+    }
+  </script>
+</Layout>
+
