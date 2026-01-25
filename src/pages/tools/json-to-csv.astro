@@ -232,17 +232,17 @@ const faqSchema = {
     </div>
   </div>
 
-  <script>
+  <script is:inline>
     // JSON to CSV 转换逻辑（支持 nested JSON）
     const convertBtn = document.getElementById('convert-btn');
     const clearBtn = document.getElementById('clear-btn');
     const downloadBtn = document.getElementById('download-btn');
-    const jsonInput = document.getElementById('json-input') as HTMLTextAreaElement;
-    const csvOutput = document.getElementById('csv-output') as HTMLTextAreaElement;
+    const jsonInput = document.getElementById('json-input');
+    const csvOutput = document.getElementById('csv-output');
 
     // Flatten nested objects (一层扁平化)
-    function flattenObject(obj: any, prefix = ''): any {
-      const flattened: any = {};
+    function flattenObject(obj, prefix = '') {
+      const flattened = {};
       
       for (const key in obj) {
         if (obj.hasOwnProperty(key)) {
@@ -289,7 +289,7 @@ const faqSchema = {
         const flattenedArr = arr.map(obj => flattenObject(obj));
 
         // 提取所有可能的键（处理不一致的对象结构）
-        const allKeys = new Set<string>();
+        const allKeys = new Set();
         flattenedArr.forEach(obj => {
           if (typeof obj === 'object' && obj !== null) {
             Object.keys(obj).forEach(key => allKeys.add(key));
@@ -330,7 +330,7 @@ const faqSchema = {
         };
 
       } catch (e) {
-        csvOutput.value = `Error: ${(e as Error).message}\n\nPlease check your JSON format.`;
+        csvOutput.value = `Error: ${e.message}\n\nPlease check your JSON format.`;
         downloadBtn?.classList.add('hidden');
       }
     });
