@@ -1,0 +1,390 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const config = {
+  slug: 'color-picker',
+  title: 'Color Picker – Hex to RGB Converter Online Free',
+  description: 'Color picker and converter online for free. Convert HEX to RGB, RGB to HEX, and pick colors visually. Supports HSL, RGBA, and color names. No signup required.',
+  keywords: 'color picker, hex to rgb, rgb to hex, color converter, hex color picker, color code converter, hex to rgba',
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How to convert HEX to RGB?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enter your HEX color code (e.g., #FF5733) and the tool will automatically show the RGB values."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to convert RGB to HEX?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enter RGB values (e.g., 255, 87, 51) and the tool will automatically show the HEX color code."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is HEX color code?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HEX color code is a 6-digit hexadecimal representation of colors used in web design (e.g., #FF5733 for orange-red)."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={config.title} description={config.description} keywords={config.keywords}>
+  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-3">
+        🎨 Color Picker & Converter
+      </h1>
+      <p class="text-lg text-gray-600">
+        Pick colors visually and convert between HEX, RGB, and HSL formats instantly. Fast and free.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <!-- Color Picker -->
+      <div class="mb-8">
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          🎨 Pick a Color:
+        </label>
+        <div class="flex gap-4 items-center">
+          <input
+            id="color-picker"
+            type="color"
+            value="#3B82F6"
+            class="w-32 h-32 border-2 border-gray-300 rounded-lg cursor-pointer"
+          />
+          <div id="color-preview" class="flex-1 h-32 rounded-lg border-2 border-gray-300" style="background-color: #3B82F6;"></div>
+        </div>
+      </div>
+
+      <!-- HEX Input -->
+      <div class="mb-6">
+        <label for="hex-input" class="block text-sm font-semibold text-gray-700 mb-2">
+          🔤 HEX Color Code:
+        </label>
+        <div class="flex gap-3">
+          <input
+            id="hex-input"
+            type="text"
+            value="#3B82F6"
+            class="flex-1 p-3 border-2 border-gray-300 rounded-lg font-mono focus:border-blue-500 focus:outline-none"
+            placeholder="#FF5733"
+          />
+          <button
+            id="copy-hex-btn"
+            class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+          >
+            📋 Copy
+          </button>
+        </div>
+      </div>
+
+      <!-- RGB Input -->
+      <div class="mb-6">
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          🔢 RGB Values:
+        </label>
+        <div class="flex gap-3">
+          <input
+            id="r-input"
+            type="number"
+            min="0"
+            max="255"
+            value="59"
+            class="w-24 p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+            placeholder="R"
+          />
+          <input
+            id="g-input"
+            type="number"
+            min="0"
+            max="255"
+            value="130"
+            class="w-24 p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+            placeholder="G"
+          />
+          <input
+            id="b-input"
+            type="number"
+            min="0"
+            max="255"
+            value="246"
+            class="w-24 p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+            placeholder="B"
+          />
+          <button
+            id="copy-rgb-btn"
+            class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+          >
+            📋 Copy RGB
+          </button>
+        </div>
+        <div id="rgb-output" class="mt-2 text-sm text-gray-600 font-mono">rgb(59, 130, 246)</div>
+      </div>
+
+      <!-- HSL Output -->
+      <div class="mb-6">
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          🌈 HSL Values:
+        </label>
+        <div class="flex gap-3">
+          <input
+            id="hsl-output"
+            type="text"
+            readonly
+            class="flex-1 p-3 border-2 border-gray-300 rounded-lg font-mono bg-gray-50"
+            value="hsl(217, 91%, 60%)"
+          />
+          <button
+            id="copy-hsl-btn"
+            class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+          >
+            📋 Copy HSL
+          </button>
+        </div>
+      </div>
+
+      <!-- RGBA Output -->
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          🎭 RGBA (with opacity):
+        </label>
+        <div class="flex gap-3 items-center">
+          <input
+            id="rgba-output"
+            type="text"
+            readonly
+            class="flex-1 p-3 border-2 border-gray-300 rounded-lg font-mono bg-gray-50"
+            value="rgba(59, 130, 246, 1)"
+          />
+          <input
+            id="opacity-input"
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value="1"
+            class="w-32"
+          />
+          <span id="opacity-value" class="text-sm font-semibold w-12">100%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Color Format Examples</h2>
+      <div class="space-y-3">
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded" style="background-color: #FF5733;"></div>
+          <div>
+            <div class="font-semibold">HEX: <code class="bg-gray-100 px-2 py-1 rounded">#FF5733</code></div>
+            <div class="text-sm text-gray-600">RGB: rgb(255, 87, 51)</div>
+            <div class="text-sm text-gray-600">HSL: hsl(11, 100%, 60%)</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded" style="background-color: #33FF57;"></div>
+          <div>
+            <div class="font-semibold">HEX: <code class="bg-gray-100 px-2 py-1 rounded">#33FF57</code></div>
+            <div class="text-sm text-gray-600">RGB: rgb(51, 255, 87)</div>
+            <div class="text-sm text-gray-600">HSL: hsl(131, 100%, 60%)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">FAQ</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">How to convert HEX to RGB?</h3>
+          <p class="text-gray-600">
+            Enter your HEX color code (e.g., #FF5733) and the tool will automatically show the RGB values.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">How to convert RGB to HEX?</h3>
+          <p class="text-gray-600">
+            Enter RGB values (e.g., 255, 87, 51) and the tool will automatically show the HEX color code.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">What is HEX color code?</h3>
+          <p class="text-gray-600">
+            HEX color code is a 6-digit hexadecimal representation of colors used in web design (e.g., #FF5733 for orange-red).
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">What is the difference between RGB and RGBA?</h3>
+          <p class="text-gray-600">
+            RGB defines colors with Red, Green, Blue values. RGBA adds an Alpha channel for opacity/transparency.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 rounded-lg p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">Related Tools</h2>
+      <div class="flex gap-3 flex-wrap">
+        <a href="/tools/base64-encode-decode" class="text-blue-600 hover:text-blue-800 font-medium">Base64 Encode/Decode</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/json-beautifier" class="text-blue-600 hover:text-blue-800 font-medium">JSON Beautifier</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/uuid-generator" class="text-blue-600 hover:text-blue-800 font-medium">UUID Generator</a>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const colorPicker = document.getElementById('color-picker');
+    const colorPreview = document.getElementById('color-preview');
+    const hexInput = document.getElementById('hex-input');
+    const rInput = document.getElementById('r-input');
+    const gInput = document.getElementById('g-input');
+    const bInput = document.getElementById('b-input');
+    const rgbOutput = document.getElementById('rgb-output');
+    const hslOutput = document.getElementById('hsl-output');
+    const rgbaOutput = document.getElementById('rgba-output');
+    const opacityInput = document.getElementById('opacity-input');
+    const opacityValue = document.getElementById('opacity-value');
+    const copyHexBtn = document.getElementById('copy-hex-btn');
+    const copyRgbBtn = document.getElementById('copy-rgb-btn');
+    const copyHslBtn = document.getElementById('copy-hsl-btn');
+
+    function hexToRgb(hex) {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : null;
+    }
+
+    function rgbToHex(r, g, b) {
+      return "#" + [r, g, b].map(x => {
+        const hex = parseInt(x).toString(16);
+        return hex.length === 1 ? "0" + hex : hex;
+      }).join('');
+    }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255;
+      g /= 255;
+      b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0;
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+          case g: h = ((b - r) / d + 2) / 6; break;
+          case b: h = ((r - g) / d + 4) / 6; break;
+        }
+      }
+
+      return {
+        h: Math.round(h * 360),
+        s: Math.round(s * 100),
+        l: Math.round(l * 100)
+      };
+    }
+
+    function updateFromHex(hex) {
+      const rgb = hexToRgb(hex);
+      if (rgb) {
+        rInput.value = rgb.r;
+        gInput.value = rgb.g;
+        bInput.value = rgb.b;
+        updateOutputs(rgb.r, rgb.g, rgb.b);
+      }
+    }
+
+    function updateFromRgb() {
+      const r = parseInt(rInput.value) || 0;
+      const g = parseInt(gInput.value) || 0;
+      const b = parseInt(bInput.value) || 0;
+      const hex = rgbToHex(r, g, b);
+      hexInput.value = hex;
+      colorPicker.value = hex;
+      updateOutputs(r, g, b);
+    }
+
+    function updateOutputs(r, g, b) {
+      const opacity = parseFloat(opacityInput.value);
+      colorPreview.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+      rgbOutput.textContent = `rgb(${r}, ${g}, ${b})`;
+      rgbaOutput.value = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+      
+      const hsl = rgbToHsl(r, g, b);
+      hslOutput.value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+    }
+
+    colorPicker?.addEventListener('input', (e) => {
+      hexInput.value = e.target.value;
+      updateFromHex(e.target.value);
+    });
+
+    hexInput?.addEventListener('input', (e) => {
+      const hex = e.target.value;
+      if (/^#[0-9A-F]{6}$/i.test(hex)) {
+        colorPicker.value = hex;
+        updateFromHex(hex);
+      }
+    });
+
+    [rInput, gInput, bInput].forEach(input => {
+      input?.addEventListener('input', updateFromRgb);
+    });
+
+    opacityInput?.addEventListener('input', (e) => {
+      const opacity = parseFloat(e.target.value);
+      opacityValue.textContent = Math.round(opacity * 100) + '%';
+      const r = parseInt(rInput.value) || 0;
+      const g = parseInt(gInput.value) || 0;
+      const b = parseInt(bInput.value) || 0;
+      rgbaOutput.value = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+    });
+
+    function copyToClipboard(text, button) {
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = button.textContent;
+        button.textContent = '✅ Copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      });
+    }
+
+    copyHexBtn?.addEventListener('click', () => {
+      copyToClipboard(hexInput.value, copyHexBtn);
+    });
+
+    copyRgbBtn?.addEventListener('click', () => {
+      copyToClipboard(rgbOutput.textContent, copyRgbBtn);
+    });
+
+    copyHslBtn?.addEventListener('click', () => {
+      copyToClipboard(hslOutput.value, copyHslBtn);
+    });
+
+    // Initialize
+    updateFromHex('#3B82F6');
+  </script>
+</Layout>
+

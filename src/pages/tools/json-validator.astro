@@ -1,0 +1,207 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// 配置数据
+const config = {
+  slug: 'json-validator',
+  title: 'JSON Validator – Validate JSON Online Free',
+  description: 'Validate JSON online for free. Check JSON syntax, find errors, and get detailed error messages instantly. Supports large files and nested JSON. No signup required.',
+  keywords: 'json validator, validate json, json syntax checker, json validation online, check json, json error checker, validate json online free',
+};
+
+// FAQ Schema (结构化数据)
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How to validate JSON online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Simply paste your JSON into the validator and click 'Validate JSON'. The tool will check syntax and show detailed error messages if invalid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is JSON validation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "JSON validation checks if your JSON follows correct syntax rules. It catches errors like missing commas, unclosed brackets, or invalid characters."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to fix JSON syntax errors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our validator shows the exact line and character where the error occurs, making it easy to locate and fix syntax issues."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={config.title} description={config.description} keywords={config.keywords}>
+  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-3">
+        ✅ JSON Validator
+      </h1>
+      <p class="text-lg text-gray-600">
+        Validate JSON syntax instantly. Find errors and get detailed error messages. Fast, secure, and completely free.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <div class="mb-6">
+        <label for="json-input" class="block text-sm font-semibold text-gray-700 mb-2">
+          📝 Paste your JSON here:
+        </label>
+        <textarea
+          id="json-input"
+          class="w-full h-64 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
+          placeholder='{"name":"John","age":30}'
+        ></textarea>
+      </div>
+
+      <div class="flex gap-3 mb-6">
+        <button
+          id="validate-btn"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md"
+        >
+          ✅ Validate JSON
+        </button>
+        <button
+          id="clear-btn"
+          class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+        >
+          🗑️ Clear
+        </button>
+      </div>
+
+      <div id="success-output" class="hidden p-4 bg-green-50 border-2 border-green-200 rounded-lg text-green-700">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">✅</span>
+          <div>
+            <div class="font-bold">Valid JSON!</div>
+            <div class="text-sm">Your JSON syntax is correct.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="error-output" class="hidden p-4 bg-red-50 border-2 border-red-200 rounded-lg text-red-700"></div>
+    </div>
+
+    <div class="bg-blue-50 rounded-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        How to Use JSON Validator?
+      </h2>
+      <ol class="list-decimal list-inside space-y-2 text-gray-700">
+        <li><strong>Paste your JSON</strong> into the input box</li>
+        <li><strong>Click "Validate JSON"</strong> to check syntax</li>
+        <li><strong>See results</strong> – green for valid, red for errors</li>
+        <li><strong>Fix errors</strong> based on detailed error messages</li>
+      </ol>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        Common JSON Errors
+      </h2>
+      <div class="space-y-3 text-gray-700">
+        <div>
+          <strong>❌ Missing comma:</strong> <code class="bg-gray-100 px-2 py-1 rounded">{"a":1 "b":2}</code>
+          <br/>
+          <strong>✅ Correct:</strong> <code class="bg-gray-100 px-2 py-1 rounded">{"a":1, "b":2}</code>
+        </div>
+        <div>
+          <strong>❌ Trailing comma:</strong> <code class="bg-gray-100 px-2 py-1 rounded">{"a":1, "b":2,}</code>
+          <br/>
+          <strong>✅ Correct:</strong> <code class="bg-gray-100 px-2 py-1 rounded">{"a":1, "b":2}</code>
+        </div>
+        <div>
+          <strong>❌ Single quotes:</strong> <code class="bg-gray-100 px-2 py-1 rounded">{'name':'John'}</code>
+          <br/>
+          <strong>✅ Correct:</strong> <code class="bg-gray-100 px-2 py-1 rounded">{"name":"John"}</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">How to validate JSON online?</h3>
+          <p class="text-gray-600">
+            Simply paste your JSON into the validator and click 'Validate JSON'. The tool will check syntax and show detailed error messages if invalid.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">What is JSON validation?</h3>
+          <p class="text-gray-600">
+            JSON validation checks if your JSON follows correct syntax rules. It catches errors like missing commas, unclosed brackets, or invalid characters.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">How to validate JSON in Python?</h3>
+          <p class="text-gray-600">
+            In Python: <code class="bg-gray-100 px-2 py-1 rounded">import json; json.loads(your_json_string)</code>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 rounded-lg p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">Related Tools</h2>
+      <div class="flex gap-3 flex-wrap">
+        <a href="/tools/json-beautifier" class="text-blue-600 hover:text-blue-800 font-medium">JSON Beautifier</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/json-to-csv" class="text-blue-600 hover:text-blue-800 font-medium">JSON to CSV</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/csv-to-json" class="text-blue-600 hover:text-blue-800 font-medium">CSV to JSON</a>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const validateBtn = document.getElementById('validate-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const jsonInput = document.getElementById('json-input');
+    const successOutput = document.getElementById('success-output');
+    const errorOutput = document.getElementById('error-output');
+
+    validateBtn?.addEventListener('click', () => {
+      const input = jsonInput.value.trim();
+      
+      if (!input) {
+        showError('Please paste JSON first');
+        return;
+      }
+
+      try {
+        JSON.parse(input);
+        successOutput.classList.remove('hidden');
+        errorOutput.classList.add('hidden');
+      } catch (e) {
+        showError(`❌ Invalid JSON\n\n${e.message}\n\nPlease check your JSON syntax.`);
+      }
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      jsonInput.value = '';
+      successOutput.classList.add('hidden');
+      errorOutput.classList.add('hidden');
+    });
+
+    function showError(message) {
+      errorOutput.textContent = message;
+      errorOutput.classList.remove('hidden');
+      successOutput.classList.add('hidden');
+    }
+  </script>
+</Layout>
+

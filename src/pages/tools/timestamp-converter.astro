@@ -1,0 +1,228 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const config = {
+  slug: 'timestamp-converter',
+  title: 'Timestamp Converter – Unix Timestamp to Date Online Free',
+  description: 'Convert Unix timestamp to date or date to timestamp online for free. Supports milliseconds, seconds, and multiple date formats. No signup required.',
+  keywords: 'timestamp converter, unix timestamp, timestamp to date, date to timestamp, epoch converter, unix time converter, timestamp converter online',
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How to convert timestamp to date?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Enter your Unix timestamp and click 'Convert to Date'. The tool supports both seconds and milliseconds timestamps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is Unix timestamp?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unix timestamp (or epoch time) is the number of seconds that have elapsed since January 1, 1970 00:00:00 UTC."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={config.title} description={config.description} keywords={config.keywords}>
+  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-3">
+        ⏰ Timestamp Converter
+      </h1>
+      <p class="text-lg text-gray-600">
+        Convert Unix timestamp to date or date to timestamp instantly. Supports seconds and milliseconds. Fast and free.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <!-- Current Timestamp -->
+      <div class="bg-blue-50 p-4 rounded-lg mb-6">
+        <div class="text-sm text-gray-600 mb-1">Current Unix Timestamp:</div>
+        <div id="current-timestamp" class="text-2xl font-bold text-blue-600"></div>
+        <div id="current-date" class="text-sm text-gray-600 mt-1"></div>
+      </div>
+
+      <!-- Timestamp to Date -->
+      <div class="mb-8">
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">🔽 Timestamp to Date</h3>
+        <div class="flex gap-3 mb-3">
+          <input
+            id="timestamp-input"
+            type="text"
+            class="flex-1 p-3 border-2 border-gray-300 rounded-lg font-mono focus:border-blue-500 focus:outline-none"
+            placeholder="1706140800"
+          />
+          <button
+            id="ts-to-date-btn"
+            class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+          >
+            Convert
+          </button>
+        </div>
+        <div id="date-output" class="p-4 bg-gray-50 rounded-lg font-mono text-sm hidden"></div>
+      </div>
+
+      <!-- Date to Timestamp -->
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900 mb-3">🔼 Date to Timestamp</h3>
+        <div class="flex gap-3 mb-3">
+          <input
+            id="date-input"
+            type="datetime-local"
+            class="flex-1 p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+          />
+          <button
+            id="date-to-ts-btn"
+            class="bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+          >
+            Convert
+          </button>
+        </div>
+        <div id="timestamp-output" class="p-4 bg-gray-50 rounded-lg font-mono text-sm hidden"></div>
+      </div>
+
+      <div id="error-output" class="hidden mt-4 p-4 bg-red-50 border-2 border-red-200 rounded-lg text-red-700"></div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Example</h2>
+      <div class="space-y-3 text-gray-700">
+        <div>
+          <strong>Timestamp:</strong> <code class="bg-gray-100 px-2 py-1 rounded">1706140800</code>
+          <br/>
+          <strong>Date:</strong> <code class="bg-gray-100 px-2 py-1 rounded">2024-01-25 00:00:00 UTC</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">FAQ</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">What is Unix timestamp?</h3>
+          <p class="text-gray-600">
+            Unix timestamp (or epoch time) is the number of seconds that have elapsed since January 1, 1970 00:00:00 UTC.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">How to get current timestamp in JavaScript?</h3>
+          <p class="text-gray-600">
+            Use: <code class="bg-gray-100 px-2 py-1 rounded">Math.floor(Date.now() / 1000)</code> for seconds or <code class="bg-gray-100 px-2 py-1 rounded">Date.now()</code> for milliseconds.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">How to convert timestamp in Python?</h3>
+          <p class="text-gray-600">
+            Use: <code class="bg-gray-100 px-2 py-1 rounded">from datetime import datetime; datetime.fromtimestamp(1706140800)</code>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 rounded-lg p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">Related Tools</h2>
+      <div class="flex gap-3 flex-wrap">
+        <a href="/tools/json-beautifier" class="text-blue-600 hover:text-blue-800 font-medium">JSON Beautifier</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/base64-encode-decode" class="text-blue-600 hover:text-blue-800 font-medium">Base64 Encode/Decode</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/uuid-generator" class="text-blue-600 hover:text-blue-800 font-medium">UUID Generator</a>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const currentTimestamp = document.getElementById('current-timestamp');
+    const currentDate = document.getElementById('current-date');
+    const timestampInput = document.getElementById('timestamp-input');
+    const dateInput = document.getElementById('date-input');
+    const tsToDateBtn = document.getElementById('ts-to-date-btn');
+    const dateToTsBtn = document.getElementById('date-to-ts-btn');
+    const dateOutput = document.getElementById('date-output');
+    const timestampOutput = document.getElementById('timestamp-output');
+    const errorOutput = document.getElementById('error-output');
+
+    function updateCurrentTime() {
+      const now = Date.now();
+      const timestamp = Math.floor(now / 1000);
+      currentTimestamp.textContent = timestamp;
+      currentDate.textContent = new Date(now).toUTCString();
+    }
+
+    updateCurrentTime();
+    setInterval(updateCurrentTime, 1000);
+
+    tsToDateBtn?.addEventListener('click', () => {
+      const input = timestampInput.value.trim();
+      if (!input) {
+        showError('Please enter a timestamp');
+        return;
+      }
+
+      try {
+        let ts = parseInt(input);
+        if (isNaN(ts)) {
+          showError('Invalid timestamp');
+          return;
+        }
+
+        // Auto-detect milliseconds vs seconds
+        if (ts > 10000000000) {
+          ts = Math.floor(ts / 1000);
+        }
+
+        const date = new Date(ts * 1000);
+        dateOutput.innerHTML = `
+          <strong>UTC:</strong> ${date.toUTCString()}<br/>
+          <strong>Local:</strong> ${date.toString()}<br/>
+          <strong>ISO:</strong> ${date.toISOString()}
+        `;
+        dateOutput.classList.remove('hidden');
+        errorOutput.classList.add('hidden');
+      } catch (e) {
+        showError(`Error: ${e.message}`);
+      }
+    });
+
+    dateToTsBtn?.addEventListener('click', () => {
+      const input = dateInput.value;
+      if (!input) {
+        showError('Please select a date');
+        return;
+      }
+
+      try {
+        const date = new Date(input);
+        const timestamp = Math.floor(date.getTime() / 1000);
+        const timestampMs = date.getTime();
+
+        timestampOutput.innerHTML = `
+          <strong>Seconds:</strong> ${timestamp}<br/>
+          <strong>Milliseconds:</strong> ${timestampMs}
+        `;
+        timestampOutput.classList.remove('hidden');
+        errorOutput.classList.add('hidden');
+      } catch (e) {
+        showError(`Error: ${e.message}`);
+      }
+    });
+
+    function showError(message) {
+      errorOutput.textContent = message;
+      errorOutput.classList.remove('hidden');
+      dateOutput.classList.add('hidden');
+      timestampOutput.classList.add('hidden');
+    }
+  </script>
+</Layout>
+

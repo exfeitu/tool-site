@@ -1,0 +1,281 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const config = {
+  slug: 'xml-to-json',
+  title: 'XML to JSON Converter – Convert XML to JSON Online Free',
+  description: 'Convert XML to JSON online for free. Paste your XML and instantly get JSON output. Supports nested XML, attributes, and large files. No signup required.',
+  keywords: 'xml to json, convert xml to json, xml to json converter, xml to json online, parse xml to json, xml to json python',
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How to convert XML to JSON?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Paste your XML into the input box and click 'Convert to JSON'. The tool will parse XML and convert it to JSON format."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does XML to JSON support attributes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! XML attributes are converted to JSON properties with an '@' prefix (e.g., @id, @class)."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={config.title} description={config.description} keywords={config.keywords}>
+  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-3">
+        🔄 XML to JSON Converter
+      </h1>
+      <p class="text-lg text-gray-600">
+        Convert XML to JSON instantly. Paste your XML data and get JSON output. Fast, secure, and completely free.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <div class="mb-6">
+        <label for="xml-input" class="block text-sm font-semibold text-gray-700 mb-2">
+          📝 Paste your XML here:
+        </label>
+        <textarea
+          id="xml-input"
+          class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
+          placeholder='<person><name>John</name><age>30</age></person>'
+        ></textarea>
+        <p class="text-xs text-gray-500 mt-1">
+          💡 Tip: Supports nested XML and attributes
+        </p>
+      </div>
+
+      <div class="flex gap-3 mb-6">
+        <button
+          id="convert-btn"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md"
+        >
+          🔄 Convert to JSON
+        </button>
+        <button
+          id="clear-btn"
+          class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+        >
+          🗑️ Clear
+        </button>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">
+          📄 JSON Output:
+        </label>
+        <textarea
+          id="json-output"
+          class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
+          readonly
+          placeholder="Your JSON will appear here..."
+        ></textarea>
+      </div>
+
+      <button
+        id="copy-btn"
+        class="mt-4 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-md hidden"
+      >
+        📋 Copy to Clipboard
+      </button>
+
+      <div id="error-output" class="hidden mt-4 p-4 bg-red-50 border-2 border-red-200 rounded-lg text-red-700"></div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Example</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Input (XML):</h3>
+          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>&lt;person&gt;
+  &lt;name&gt;John&lt;/name&gt;
+  &lt;age&gt;30&lt;/age&gt;
+  &lt;city&gt;New York&lt;/city&gt;
+&lt;/person&gt;</code></pre>
+        </div>
+        <div class="text-center text-gray-400 text-2xl">↓</div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-2">Output (JSON):</h3>
+          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>{
+  "person": {
+    "name": "John",
+    "age": "30",
+    "city": "New York"
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">FAQ</h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">How to convert XML to JSON?</h3>
+          <p class="text-gray-600">
+            Paste your XML into the input box and click 'Convert to JSON'. The tool will parse XML and convert it to JSON format.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">Does XML to JSON support attributes?</h3>
+          <p class="text-gray-600">
+            Yes! XML attributes are converted to JSON properties with an '@' prefix (e.g., @id, @class).
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">How to convert XML to JSON in Python?</h3>
+          <p class="text-gray-600">
+            Use: <code class="bg-gray-100 px-2 py-1 rounded">import xmltodict, json; json.dumps(xmltodict.parse(xml_string))</code>
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">Can I convert nested XML?</h3>
+          <p class="text-gray-600">
+            Yes! This tool supports nested XML elements and converts them to nested JSON objects.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 rounded-lg p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">Related Tools</h2>
+      <div class="flex gap-3 flex-wrap">
+        <a href="/tools/json-beautifier" class="text-blue-600 hover:text-blue-800 font-medium">JSON Beautifier</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/json-to-csv" class="text-blue-600 hover:text-blue-800 font-medium">JSON to CSV</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/csv-to-json" class="text-blue-600 hover:text-blue-800 font-medium">CSV to JSON</a>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const convertBtn = document.getElementById('convert-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const xmlInput = document.getElementById('xml-input');
+    const jsonOutput = document.getElementById('json-output');
+    const errorOutput = document.getElementById('error-output');
+
+    function xmlToJson(xml) {
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(xml, 'text/xml');
+
+      // Check for parsing errors
+      const parserError = xmlDoc.querySelector('parsererror');
+      if (parserError) {
+        throw new Error('Invalid XML: ' + parserError.textContent);
+      }
+
+      function parseNode(node) {
+        const obj = {};
+
+        // Handle attributes
+        if (node.attributes && node.attributes.length > 0) {
+          for (let i = 0; i < node.attributes.length; i++) {
+            const attr = node.attributes[i];
+            obj['@' + attr.name] = attr.value;
+          }
+        }
+
+        // Handle child nodes
+        if (node.childNodes && node.childNodes.length > 0) {
+          let hasElements = false;
+          let textContent = '';
+
+          for (let i = 0; i < node.childNodes.length; i++) {
+            const child = node.childNodes[i];
+
+            if (child.nodeType === 1) { // Element node
+              hasElements = true;
+              const childName = child.nodeName;
+              const childValue = parseNode(child);
+
+              if (obj[childName]) {
+                if (!Array.isArray(obj[childName])) {
+                  obj[childName] = [obj[childName]];
+                }
+                obj[childName].push(childValue);
+              } else {
+                obj[childName] = childValue;
+              }
+            } else if (child.nodeType === 3) { // Text node
+              textContent += child.nodeValue.trim();
+            }
+          }
+
+          if (!hasElements && textContent) {
+            if (Object.keys(obj).length === 0) {
+              return textContent;
+            } else {
+              obj['#text'] = textContent;
+            }
+          }
+        }
+
+        return Object.keys(obj).length === 0 ? null : obj;
+      }
+
+      const result = {};
+      result[xmlDoc.documentElement.nodeName] = parseNode(xmlDoc.documentElement);
+      return result;
+    }
+
+    convertBtn?.addEventListener('click', () => {
+      const input = xmlInput.value.trim();
+
+      if (!input) {
+        showError('Please paste XML data first');
+        return;
+      }
+
+      try {
+        const json = xmlToJson(input);
+        jsonOutput.value = JSON.stringify(json, null, 2);
+        copyBtn?.classList.remove('hidden');
+        errorOutput.classList.add('hidden');
+      } catch (e) {
+        showError(`Conversion error: ${e.message}`);
+      }
+    });
+
+    copyBtn?.addEventListener('click', () => {
+      jsonOutput.select();
+      document.execCommand('copy');
+      const originalText = copyBtn.textContent;
+      copyBtn.textContent = '✅ Copied!';
+      setTimeout(() => {
+        copyBtn.textContent = originalText;
+      }, 2000);
+    });
+
+    clearBtn?.addEventListener('click', () => {
+      xmlInput.value = '';
+      jsonOutput.value = '';
+      copyBtn?.classList.add('hidden');
+      errorOutput.classList.add('hidden');
+    });
+
+    function showError(message) {
+      errorOutput.textContent = message;
+      errorOutput.classList.remove('hidden');
+      jsonOutput.value = '';
+      copyBtn?.classList.add('hidden');
+    }
+  </script>
+</Layout>
+
