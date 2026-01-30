@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 // 配置数据
 const config = {
   slug: 'url-encode-decode',
-  title: 'URL Encode/Decode – Free Online URL Encoder Decoder',
+  title: 'URL Encode/Decode - Free Online URL Encoder Decoder',
   description: 'Encode and decode URLs online for free. Convert special characters to URL-safe format or decode URL-encoded strings instantly. Supports UTF-8 and international characters. No signup required.',
   keywords: 'url encode, url decode, url encoder, url decoder, encode url online, decode url online, url encoding, percent encoding, uri encode',
 };
@@ -59,7 +59,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <!-- 标题区 -->
     <div class="mb-8">
@@ -75,9 +77,9 @@ const faqSchema = {
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
       <!-- 输入区 -->
       <div class="mb-6">
-        <label for="url-input" class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📝 Enter your URL or text:
-        </label>
+        </div>
         <textarea
           id="url-input"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
@@ -112,9 +114,9 @@ const faqSchema = {
 
       <!-- 输出区 -->
       <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📄 Output:
-        </label>
+        </div>
         <textarea
           id="url-output"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
@@ -144,7 +146,7 @@ const faqSchema = {
         <li><strong>To Encode:</strong> Paste your URL or text and click "Encode URL"</li>
         <li><strong>To Decode:</strong> Paste URL-encoded string and click "Decode URL"</li>
         <li><strong>Copy the result</strong> and use in your project</li>
-        <li><strong>All processing is local</strong> – your data never leaves your browser</li>
+        <li><strong>All processing is local</strong> - your data never leaves your browser</li>
       </ol>
     </div>
 
@@ -256,7 +258,7 @@ const faqSchema = {
     </div>
   </div>
 
-  <script is:inline>
+  <script type="module">
     // URL Encode/Decode 逻辑
     const encodeBtn = document.getElementById('encode-btn');
     const decodeBtn = document.getElementById('decode-btn');
@@ -266,7 +268,7 @@ const faqSchema = {
     const urlOutput = document.getElementById('url-output');
     const errorOutput = document.getElementById('error-output');
 
-    encodeBtn?.addEventListener('click', () => {
+    if (encodeBtn) { encodeBtn.addEventListener('click', () => {
       const input = urlInput.value;
       
       if (!input) {
@@ -279,7 +281,7 @@ const faqSchema = {
         const encoded = encodeURIComponent(input);
         
         urlOutput.value = encoded;
-        copyBtn?.classList.remove('hidden');
+        if (copyBtn) { copyBtn.classList.remove('hidden');
         errorOutput.classList.add('hidden');
 
       } catch (e) {
@@ -287,7 +289,7 @@ const faqSchema = {
       }
     });
 
-    decodeBtn?.addEventListener('click', () => {
+    if (decodeBtn) { decodeBtn.addEventListener('click', () => {
       const input = urlInput.value.trim();
       
       if (!input) {
@@ -300,7 +302,7 @@ const faqSchema = {
         const decoded = decodeURIComponent(input);
         
         urlOutput.value = decoded;
-        copyBtn?.classList.remove('hidden');
+        if (copyBtn) { copyBtn.classList.remove('hidden');
         errorOutput.classList.add('hidden');
 
       } catch (e) {
@@ -308,7 +310,7 @@ const faqSchema = {
       }
     });
 
-    copyBtn?.addEventListener('click', () => {
+    if (copyBtn) { copyBtn.addEventListener('click', () => {
       urlOutput.select();
       document.execCommand('copy');
       
@@ -320,10 +322,10 @@ const faqSchema = {
       }, 2000);
     });
 
-    clearBtn?.addEventListener('click', () => {
+    if (clearBtn) { clearBtn.addEventListener('click', () => {
       urlInput.value = '';
       urlOutput.value = '';
-      copyBtn?.classList.add('hidden');
+      if (copyBtn) { copyBtn.classList.add('hidden');
       errorOutput.classList.add('hidden');
     });
 
@@ -331,8 +333,9 @@ const faqSchema = {
       errorOutput.textContent = message;
       errorOutput.classList.remove('hidden');
       urlOutput.value = '';
-      copyBtn?.classList.add('hidden');
+      if (copyBtn) { copyBtn.classList.add('hidden');
     }
   </script>
 </Layout>
+
 

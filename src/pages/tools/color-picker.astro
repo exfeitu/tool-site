@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 
 const config = {
   slug: 'color-picker',
-  title: 'Color Picker – Hex to RGB Converter Online Free',
+  title: 'Color Picker - Hex to RGB Converter Online Free',
   description: 'Color picker and converter online for free. Convert HEX to RGB, RGB to HEX, and pick colors visually. Supports HSL, RGBA, and color names. No signup required.',
   keywords: 'color picker, hex to rgb, rgb to hex, color converter, hex color picker, color code converter, hex to rgba',
 };
@@ -41,7 +41,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <div class="mb-8">
       <h1 class="text-4xl font-bold text-gray-900 mb-3">
@@ -55,9 +57,9 @@ const faqSchema = {
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
       <!-- Color Picker -->
       <div class="mb-8">
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           🎨 Pick a Color:
-        </label>
+        </div>
         <div class="flex gap-4 items-center">
           <input
             id="color-picker"
@@ -71,9 +73,9 @@ const faqSchema = {
 
       <!-- HEX Input -->
       <div class="mb-6">
-        <label for="hex-input" class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           🔤 HEX Color Code:
-        </label>
+        </div>
         <div class="flex gap-3">
           <input
             id="hex-input"
@@ -93,9 +95,9 @@ const faqSchema = {
 
       <!-- RGB Input -->
       <div class="mb-6">
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           🔢 RGB Values:
-        </label>
+        </div>
         <div class="flex gap-3">
           <input
             id="r-input"
@@ -136,9 +138,9 @@ const faqSchema = {
 
       <!-- HSL Output -->
       <div class="mb-6">
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           🌈 HSL Values:
-        </label>
+        </div>
         <div class="flex gap-3">
           <input
             id="hsl-output"
@@ -158,9 +160,9 @@ const faqSchema = {
 
       <!-- RGBA Output -->
       <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           🎭 RGBA (with opacity):
-        </label>
+        </div>
         <div class="flex gap-3 items-center">
           <input
             id="rgba-output"
@@ -247,7 +249,7 @@ const faqSchema = {
     </div>
   </div>
 
-  <script is:inline>
+  <script type="module">
     const colorPicker = document.getElementById('color-picker');
     const colorPreview = document.getElementById('color-preview');
     const hexInput = document.getElementById('hex-input');
@@ -335,12 +337,12 @@ const faqSchema = {
       hslOutput.value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
     }
 
-    colorPicker?.addEventListener('input', (e) => {
+    if (colorPicker) { colorPicker.addEventListener('input', (e) => {
       hexInput.value = e.target.value;
       updateFromHex(e.target.value);
     });
 
-    hexInput?.addEventListener('input', (e) => {
+    if (hexInput) { hexInput.addEventListener('input', (e) => {
       const hex = e.target.value;
       if (/^#[0-9A-F]{6}$/i.test(hex)) {
         colorPicker.value = hex;
@@ -349,10 +351,10 @@ const faqSchema = {
     });
 
     [rInput, gInput, bInput].forEach(input => {
-      input?.addEventListener('input', updateFromRgb);
+      if (input) { input.addEventListener('input', updateFromRgb);
     });
 
-    opacityInput?.addEventListener('input', (e) => {
+    if (opacityInput) { opacityInput.addEventListener('input', (e) => {
       const opacity = parseFloat(e.target.value);
       opacityValue.textContent = Math.round(opacity * 100) + '%';
       const r = parseInt(rInput.value) || 0;
@@ -371,15 +373,15 @@ const faqSchema = {
       });
     }
 
-    copyHexBtn?.addEventListener('click', () => {
+    if (copyHexBtn) { copyHexBtn.addEventListener('click', () => {
       copyToClipboard(hexInput.value, copyHexBtn);
     });
 
-    copyRgbBtn?.addEventListener('click', () => {
+    if (copyRgbBtn) { copyRgbBtn.addEventListener('click', () => {
       copyToClipboard(rgbOutput.textContent, copyRgbBtn);
     });
 
-    copyHslBtn?.addEventListener('click', () => {
+    if (copyHslBtn) { copyHslBtn.addEventListener('click', () => {
       copyToClipboard(hslOutput.value, copyHslBtn);
     });
 
@@ -387,4 +389,5 @@ const faqSchema = {
     updateFromHex('#3B82F6');
   </script>
 </Layout>
+
 

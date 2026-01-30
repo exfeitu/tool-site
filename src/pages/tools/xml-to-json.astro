@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 
 const config = {
   slug: 'xml-to-json',
-  title: 'XML to JSON Converter – Convert XML to JSON Online Free',
+  title: 'XML to JSON Converter - Convert XML to JSON Online Free',
   description: 'Convert XML to JSON online for free. Paste your XML and instantly get JSON output. Supports nested XML, attributes, and large files. No signup required.',
   keywords: 'xml to json, convert xml to json, xml to json converter, xml to json online, parse xml to json, xml to json python',
 };
@@ -33,7 +33,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <div class="mb-8">
       <h1 class="text-4xl font-bold text-gray-900 mb-3">
@@ -46,9 +48,9 @@ const faqSchema = {
 
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
       <div class="mb-6">
-        <label for="xml-input" class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📝 Paste your XML here:
-        </label>
+        </div>
         <textarea
           id="xml-input"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
@@ -75,9 +77,9 @@ const faqSchema = {
       </div>
 
       <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📄 JSON Output:
-        </label>
+        </div>
         <textarea
           id="json-output"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
@@ -110,13 +112,13 @@ const faqSchema = {
         <div class="text-center text-gray-400 text-2xl">↓</div>
         <div>
           <h3 class="font-semibold text-gray-900 mb-2">Output (JSON):</h3>
-          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>{
+          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>{`{
   "person": {
     "name": "John",
     "age": "30",
     "city": "New York"
   }
-}</code></pre>
+}`}</code></pre>
         </div>
       </div>
     </div>
@@ -163,7 +165,7 @@ const faqSchema = {
     </div>
   </div>
 
-  <script is:inline>
+  <script type="module">
     const convertBtn = document.getElementById('convert-btn');
     const clearBtn = document.getElementById('clear-btn');
     const copyBtn = document.getElementById('copy-btn');
@@ -235,7 +237,7 @@ const faqSchema = {
       return result;
     }
 
-    convertBtn?.addEventListener('click', () => {
+    if (convertBtn) { convertBtn.addEventListener('click', () => {
       const input = xmlInput.value.trim();
 
       if (!input) {
@@ -246,14 +248,14 @@ const faqSchema = {
       try {
         const json = xmlToJson(input);
         jsonOutput.value = JSON.stringify(json, null, 2);
-        copyBtn?.classList.remove('hidden');
+        if (copyBtn) { copyBtn.classList.remove('hidden');
         errorOutput.classList.add('hidden');
       } catch (e) {
         showError(`Conversion error: ${e.message}`);
       }
     });
 
-    copyBtn?.addEventListener('click', () => {
+    if (copyBtn) { copyBtn.addEventListener('click', () => {
       jsonOutput.select();
       document.execCommand('copy');
       const originalText = copyBtn.textContent;
@@ -263,10 +265,10 @@ const faqSchema = {
       }, 2000);
     });
 
-    clearBtn?.addEventListener('click', () => {
+    if (clearBtn) { clearBtn.addEventListener('click', () => {
       xmlInput.value = '';
       jsonOutput.value = '';
-      copyBtn?.classList.add('hidden');
+      if (copyBtn) { copyBtn.classList.add('hidden');
       errorOutput.classList.add('hidden');
     });
 
@@ -274,8 +276,9 @@ const faqSchema = {
       errorOutput.textContent = message;
       errorOutput.classList.remove('hidden');
       jsonOutput.value = '';
-      copyBtn?.classList.add('hidden');
+      if (copyBtn) { copyBtn.classList.add('hidden');
     }
   </script>
 </Layout>
+
 

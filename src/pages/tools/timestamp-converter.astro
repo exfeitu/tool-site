@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 
 const config = {
   slug: 'timestamp-converter',
-  title: 'Timestamp Converter – Unix Timestamp to Date Online Free',
+  title: 'Timestamp Converter - Unix Timestamp to Date Online Free',
   description: 'Convert Unix timestamp to date or date to timestamp online for free. Supports milliseconds, seconds, and multiple date formats. No signup required.',
   keywords: 'timestamp converter, unix timestamp, timestamp to date, date to timestamp, epoch converter, unix time converter, timestamp converter online',
 };
@@ -33,7 +33,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <div class="mb-8">
       <h1 class="text-4xl font-bold text-gray-900 mb-3">
@@ -141,7 +143,7 @@ const faqSchema = {
     </div>
   </div>
 
-  <script is:inline>
+  <script type="module">
     const currentTimestamp = document.getElementById('current-timestamp');
     const currentDate = document.getElementById('current-date');
     const timestampInput = document.getElementById('timestamp-input');
@@ -162,7 +164,7 @@ const faqSchema = {
     updateCurrentTime();
     setInterval(updateCurrentTime, 1000);
 
-    tsToDateBtn?.addEventListener('click', () => {
+    if (tsToDateBtn) { tsToDateBtn.addEventListener('click', () => {
       const input = timestampInput.value.trim();
       if (!input) {
         showError('Please enter a timestamp');
@@ -194,7 +196,7 @@ const faqSchema = {
       }
     });
 
-    dateToTsBtn?.addEventListener('click', () => {
+    if (dateToTsBtn) { dateToTsBtn.addEventListener('click', () => {
       const input = dateInput.value;
       if (!input) {
         showError('Please select a date');
@@ -225,4 +227,5 @@ const faqSchema = {
     }
   </script>
 </Layout>
+
 

@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 
 const config = {
   slug: 'csv-to-json',
-  title: 'CSV to JSON Converter – Convert CSV to JSON Online Free',
+  title: 'CSV to JSON Converter - Convert CSV to JSON Online Free',
   description: 'Convert CSV to JSON online for free. Paste your CSV data and instantly get JSON output. Supports headers, nested data, and large files. No signup required.',
   keywords: 'csv to json, convert csv to json, csv to json converter, csv file to json, csv to json online, csv to json python, parse csv to json',
 };
@@ -33,7 +33,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)}></script>
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <div class="mb-8">
       <h1 class="text-4xl font-bold text-gray-900 mb-3">
@@ -108,10 +110,10 @@ Jane,25,London</code></pre>
         <div class="text-center text-gray-400 text-2xl">↓</div>
         <div>
           <h3 class="font-semibold text-gray-900 mb-2">Output (JSON):</h3>
-          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>[
+          <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm"><code>{`[
   {"name":"John","age":"30","city":"New York"},
   {"name":"Jane","age":"25","city":"London"}
-]</code></pre>
+]`}</code></pre>
         </div>
       </div>
     </div>

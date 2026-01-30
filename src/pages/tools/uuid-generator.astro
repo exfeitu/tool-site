@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 
 const config = {
   slug: 'uuid-generator',
-  title: 'UUID Generator – Generate UUID/GUID Online Free',
+  title: 'UUID Generator - Generate UUID/GUID Online Free',
   description: 'Generate UUID (Universally Unique Identifier) online for free. Create random UUIDs instantly. Supports v4 UUID generation. No signup required.',
   keywords: 'uuid generator, generate uuid, uuid online, guid generator, uuid v4, random uuid, uuid generator online, create uuid',
 };
@@ -41,7 +41,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <div class="mb-8">
       <h1 class="text-4xl font-bold text-gray-900 mb-3">
@@ -54,9 +56,9 @@ const faqSchema = {
 
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
       <div class="mb-6">
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           How many UUIDs to generate?
-        </label>
+        </div>
         <div class="flex gap-3 items-center">
           <input
             id="count-input"
@@ -82,9 +84,9 @@ const faqSchema = {
       </div>
 
       <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📄 Generated UUIDs:
-        </label>
+        </div>
         <textarea
           id="uuid-output"
           class="w-full h-64 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
@@ -172,7 +174,7 @@ const faqSchema = {
     </div>
   </div>
 
-  <script is:inline>
+  <script type="module">
     const generateBtn = document.getElementById('generate-btn');
     const clearBtn = document.getElementById('clear-btn');
     const copyBtn = document.getElementById('copy-btn');
@@ -187,7 +189,7 @@ const faqSchema = {
       });
     }
 
-    generateBtn?.addEventListener('click', () => {
+    if (generateBtn) { generateBtn.addEventListener('click', () => {
       const count = parseInt(countInput.value) || 1;
       const validCount = Math.min(Math.max(count, 1), 100);
       
@@ -197,16 +199,16 @@ const faqSchema = {
       }
       
       uuidOutput.value = uuids.join('\n');
-      copyBtn?.classList.remove('hidden');
+      if (copyBtn) { copyBtn.classList.remove('hidden');
     });
 
-    clearBtn?.addEventListener('click', () => {
+    if (clearBtn) { clearBtn.addEventListener('click', () => {
       uuidOutput.value = '';
       countInput.value = '1';
-      copyBtn?.classList.add('hidden');
+      if (copyBtn) { copyBtn.classList.add('hidden');
     });
 
-    copyBtn?.addEventListener('click', () => {
+    if (copyBtn) { copyBtn.addEventListener('click', () => {
       uuidOutput.select();
       document.execCommand('copy');
       const originalText = copyBtn.textContent;
@@ -222,4 +224,5 @@ const faqSchema = {
     });
   </script>
 </Layout>
+
 

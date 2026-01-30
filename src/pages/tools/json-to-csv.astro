@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 // 配置数据（未来可抽成 JSON）
 const config = {
   slug: 'json-to-csv',
-  title: 'JSON to CSV Converter – Convert JSON to CSV Online Free',
+  title: 'JSON to CSV Converter - Convert JSON to CSV Online Free',
   description: 'Convert JSON to CSV online for free. Paste your JSON array and instantly download as CSV file. Supports nested JSON, Python JSON, and Excel formats. No signup required.',
   keywords: 'json to csv, convert json to csv, json to csv converter, json file to csv, nested json to csv, json to csv online, json to csv python, convert json to csv free',
 };
@@ -59,7 +59,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <!-- 标题区 -->
     <div class="mb-8">
@@ -75,9 +77,9 @@ const faqSchema = {
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
       <!-- 输入区 -->
       <div class="mb-6">
-        <label for="json-input" class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📝 Paste your JSON array here:
-        </label>
+        </div>
         <textarea
           id="json-input"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
@@ -106,9 +108,9 @@ const faqSchema = {
 
       <!-- 输出区 -->
       <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📄 CSV Output:
-        </label>
+        </div>
         <textarea
           id="csv-output"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
@@ -234,7 +236,7 @@ const faqSchema = {
     </div>
   </div>
 
-  <script is:inline>
+  <script type="module">
     // JSON to CSV 转换逻辑（支持 nested JSON）
     const convertBtn = document.getElementById('convert-btn');
     const clearBtn = document.getElementById('clear-btn');
@@ -267,12 +269,12 @@ const faqSchema = {
       return flattened;
     }
 
-    convertBtn?.addEventListener('click', () => {
+    if (convertBtn) { convertBtn.addEventListener('click', () => {
       const input = jsonInput.value.trim();
       
       if (!input) {
         csvOutput.value = 'Error: Please paste JSON data first';
-        downloadBtn?.classList.add('hidden');
+        if (downloadBtn) { downloadBtn.classList.add('hidden');
         return;
       }
 
@@ -316,7 +318,7 @@ const faqSchema = {
 
         const csv = [header, ...rows].join('\n');
         csvOutput.value = csv;
-        downloadBtn?.classList.remove('hidden');
+        if (downloadBtn) { downloadBtn.classList.remove('hidden');
 
         // 设置下载功能
         downloadBtn.onclick = () => {
@@ -333,15 +335,16 @@ const faqSchema = {
 
       } catch (e) {
         csvOutput.value = `Error: ${e.message}\n\nPlease check your JSON format.`;
-        downloadBtn?.classList.add('hidden');
+        if (downloadBtn) { downloadBtn.classList.add('hidden');
       }
     });
 
-    clearBtn?.addEventListener('click', () => {
+    if (clearBtn) { clearBtn.addEventListener('click', () => {
       jsonInput.value = '';
       csvOutput.value = '';
-      downloadBtn?.classList.add('hidden');
+      if (downloadBtn) { downloadBtn.classList.add('hidden');
     });
   </script>
 </Layout>
+
 

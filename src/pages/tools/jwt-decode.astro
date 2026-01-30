@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 // 配置数据
 const config = {
   slug: 'jwt-decode',
-  title: 'JWT Decode – Decode JWT Token Online Free',
+  title: 'JWT Decode - Decode JWT Token Online Free',
   description: 'Decode JWT tokens online for free. Paste your JWT token and instantly view header, payload, and signature. Supports verification without secret. No signup required.',
   keywords: 'jwt decode, jwt decode token, jwt decode online, jwt decode without secret, jwt decode verify signature, python jwt decode, jwt decode npm, jwt decode locally, access token jwt decode',
 };
@@ -59,7 +59,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <!-- 标题区 -->
     <div class="mb-8">
@@ -75,9 +77,9 @@ const faqSchema = {
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
       <!-- 输入区 -->
       <div class="mb-6">
-        <label for="jwt-input" class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           🔑 Paste your JWT token here:
-        </label>
+        </div>
         <textarea
           id="jwt-input"
           class="w-full h-32 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
@@ -108,25 +110,25 @@ const faqSchema = {
       <div class="space-y-4" id="output-container" style="display: none;">
         <!-- Header -->
         <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">
+          <div class="block text-sm font-semibold text-gray-700 mb-2">
             📋 Header:
-          </label>
+          </div>
           <pre id="header-output" class="w-full p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 overflow-x-auto"></pre>
         </div>
 
         <!-- Payload -->
         <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">
+          <div class="block text-sm font-semibold text-gray-700 mb-2">
             📦 Payload:
-          </label>
+          </div>
           <pre id="payload-output" class="w-full p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 overflow-x-auto"></pre>
         </div>
 
         <!-- Signature -->
         <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">
+          <div class="block text-sm font-semibold text-gray-700 mb-2">
             🔏 Signature:
-          </label>
+          </div>
           <pre id="signature-output" class="w-full p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 overflow-x-auto"></pre>
         </div>
       </div>
@@ -260,7 +262,7 @@ const faqSchema = {
     </div>
   </div>
 
-  <script is:inline>
+  <script type="module">
     // JWT Decode 逻辑
     const decodeBtn = document.getElementById('decode-btn');
     const clearBtn = document.getElementById('clear-btn');
@@ -288,7 +290,7 @@ const faqSchema = {
       }
     }
 
-    decodeBtn?.addEventListener('click', () => {
+    if (decodeBtn) { decodeBtn.addEventListener('click', () => {
       const token = jwtInput.value.trim();
       
       if (!token) {
@@ -327,7 +329,7 @@ const faqSchema = {
       }
     });
 
-    clearBtn?.addEventListener('click', () => {
+    if (clearBtn) { clearBtn.addEventListener('click', () => {
       jwtInput.value = '';
       outputContainer.style.display = 'none';
       errorOutput.classList.add('hidden');
@@ -340,4 +342,5 @@ const faqSchema = {
     }
   </script>
 </Layout>
+
 

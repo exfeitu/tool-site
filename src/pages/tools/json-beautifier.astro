@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 // 配置数据
 const config = {
   slug: 'json-beautifier',
-  title: 'JSON Beautifier – Format & Beautify JSON Online Free',
+  title: 'JSON Beautifier - Format & Beautify JSON Online Free',
   description: 'Beautify and format JSON online for free. Paste your minified JSON and instantly get formatted, readable output. Supports validation, minify, and syntax highlighting. No signup required.',
   keywords: 'json beautifier, json formatter, json pretty print, format json online, beautify json, json validator, json minify, json viewer, pretty json',
 };
@@ -59,7 +59,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <!-- 标题区 -->
     <div class="mb-8">
@@ -75,9 +77,9 @@ const faqSchema = {
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
       <!-- 输入区 -->
       <div class="mb-6">
-        <label for="json-input" class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📝 Paste your JSON here:
-        </label>
+        </div>
         <textarea
           id="json-input"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
@@ -112,9 +114,9 @@ const faqSchema = {
 
       <!-- 输出区 -->
       <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📄 Formatted Output:
-        </label>
+        </div>
         <textarea
           id="json-output"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
@@ -264,7 +266,7 @@ const faqSchema = {
     </div>
   </div>
 
-  <script is:inline>
+  <script type="module">
     // JSON Beautifier 逻辑
     const beautifyBtn = document.getElementById('beautify-btn');
     const minifyBtn = document.getElementById('minify-btn');
@@ -274,7 +276,7 @@ const faqSchema = {
     const jsonOutput = document.getElementById('json-output');
     const errorOutput = document.getElementById('error-output');
 
-    beautifyBtn?.addEventListener('click', () => {
+    if (beautifyBtn) { beautifyBtn.addEventListener('click', () => {
       const input = jsonInput.value.trim();
       
       if (!input) {
@@ -288,7 +290,7 @@ const faqSchema = {
         const beautified = JSON.stringify(parsed, null, 2);
         
         jsonOutput.value = beautified;
-        copyBtn?.classList.remove('hidden');
+        if (copyBtn) { copyBtn.classList.remove('hidden');
         errorOutput.classList.add('hidden');
 
       } catch (e) {
@@ -296,7 +298,7 @@ const faqSchema = {
       }
     });
 
-    minifyBtn?.addEventListener('click', () => {
+    if (minifyBtn) { minifyBtn.addEventListener('click', () => {
       const input = jsonInput.value.trim();
       
       if (!input) {
@@ -310,7 +312,7 @@ const faqSchema = {
         const minified = JSON.stringify(parsed);
         
         jsonOutput.value = minified;
-        copyBtn?.classList.remove('hidden');
+        if (copyBtn) { copyBtn.classList.remove('hidden');
         errorOutput.classList.add('hidden');
 
       } catch (e) {
@@ -318,7 +320,7 @@ const faqSchema = {
       }
     });
 
-    copyBtn?.addEventListener('click', () => {
+    if (copyBtn) { copyBtn.addEventListener('click', () => {
       jsonOutput.select();
       document.execCommand('copy');
       
@@ -330,10 +332,10 @@ const faqSchema = {
       }, 2000);
     });
 
-    clearBtn?.addEventListener('click', () => {
+    if (clearBtn) { clearBtn.addEventListener('click', () => {
       jsonInput.value = '';
       jsonOutput.value = '';
-      copyBtn?.classList.add('hidden');
+      if (copyBtn) { copyBtn.classList.add('hidden');
       errorOutput.classList.add('hidden');
     });
 
@@ -341,8 +343,9 @@ const faqSchema = {
       errorOutput.textContent = message;
       errorOutput.classList.remove('hidden');
       jsonOutput.value = '';
-      copyBtn?.classList.add('hidden');
+      if (copyBtn) { copyBtn.classList.add('hidden');
     }
   </script>
 </Layout>
+
 

@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 // 配置数据
 const config = {
   slug: 'base64-encode-decode',
-  title: 'Base64 Encode/Decode – Free Online Base64 Converter',
+  title: 'Base64 Encode/Decode - Free Online Base64 Converter',
   description: 'Encode and decode Base64 online for free. Convert text to Base64 or decode Base64 to text instantly. Supports UTF-8, images, and files. No signup required.',
   keywords: 'base64 encode, base64 decode, base64 converter, encode base64 online, decode base64 online, base64 to text, text to base64, base64 encoder decoder',
 };
@@ -59,7 +59,9 @@ const faqSchema = {
 ---
 
 <Layout title={config.title} description={config.description} keywords={config.keywords}>
-  <script type="application/ld+json" slot="structured-data" set:html={JSON.stringify(faqSchema)} />
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
   <div class="max-w-4xl mx-auto px-4">
     <!-- 标题区 -->
     <div class="mb-8">
@@ -75,9 +77,9 @@ const faqSchema = {
     <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
       <!-- 输入区 -->
       <div class="mb-6">
-        <label for="text-input" class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📝 Enter your text or Base64:
-        </label>
+        </div>
         <textarea
           id="text-input"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-none"
@@ -112,9 +114,9 @@ const faqSchema = {
 
       <!-- 输出区 -->
       <div>
-        <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
           📄 Output:
-        </label>
+        </div>
         <textarea
           id="text-output"
           class="w-full h-48 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-none"
@@ -144,7 +146,7 @@ const faqSchema = {
         <li><strong>To Encode:</strong> Paste your text and click "Encode to Base64"</li>
         <li><strong>To Decode:</strong> Paste Base64 string and click "Decode from Base64"</li>
         <li><strong>Copy the result</strong> and use in your project</li>
-        <li><strong>All processing is local</strong> – your data never leaves your browser</li>
+        <li><strong>All processing is local</strong> - your data never leaves your browser</li>
       </ol>
     </div>
 
@@ -256,7 +258,7 @@ const faqSchema = {
     </div>
   </div>
 
-  <script is:inline>
+  <script type="module">
     // Base64 Encode/Decode 逻辑
     const encodeBtn = document.getElementById('encode-btn');
     const decodeBtn = document.getElementById('decode-btn');
@@ -266,7 +268,7 @@ const faqSchema = {
     const textOutput = document.getElementById('text-output');
     const errorOutput = document.getElementById('error-output');
 
-    encodeBtn?.addEventListener('click', () => {
+    if (encodeBtn) { encodeBtn.addEventListener('click', () => {
       const input = textInput.value;
       
       if (!input) {
@@ -279,7 +281,7 @@ const faqSchema = {
         const encoded = btoa(unescape(encodeURIComponent(input)));
         
         textOutput.value = encoded;
-        copyBtn?.classList.remove('hidden');
+        if (copyBtn) { copyBtn.classList.remove('hidden');
         errorOutput.classList.add('hidden');
 
       } catch (e) {
@@ -287,7 +289,7 @@ const faqSchema = {
       }
     });
 
-    decodeBtn?.addEventListener('click', () => {
+    if (decodeBtn) { decodeBtn.addEventListener('click', () => {
       const input = textInput.value.trim();
       
       if (!input) {
@@ -300,7 +302,7 @@ const faqSchema = {
         const decoded = decodeURIComponent(escape(atob(input)));
         
         textOutput.value = decoded;
-        copyBtn?.classList.remove('hidden');
+        if (copyBtn) { copyBtn.classList.remove('hidden');
         errorOutput.classList.add('hidden');
 
       } catch (e) {
@@ -308,7 +310,7 @@ const faqSchema = {
       }
     });
 
-    copyBtn?.addEventListener('click', () => {
+    if (copyBtn) { copyBtn.addEventListener('click', () => {
       textOutput.select();
       document.execCommand('copy');
       
@@ -320,10 +322,10 @@ const faqSchema = {
       }, 2000);
     });
 
-    clearBtn?.addEventListener('click', () => {
+    if (clearBtn) { clearBtn.addEventListener('click', () => {
       textInput.value = '';
       textOutput.value = '';
-      copyBtn?.classList.add('hidden');
+      if (copyBtn) { copyBtn.classList.add('hidden');
       errorOutput.classList.add('hidden');
     });
 
@@ -331,8 +333,9 @@ const faqSchema = {
       errorOutput.textContent = message;
       errorOutput.classList.remove('hidden');
       textOutput.value = '';
-      copyBtn?.classList.add('hidden');
+      if (copyBtn) { copyBtn.classList.add('hidden');
     }
   </script>
 </Layout>
+
 

@@ -4,5 +4,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://your-tool-site.vercel.app',
   output: 'static',
+  vite: {
+    build: {
+      minify: false
+    }
+  }
 });
 
