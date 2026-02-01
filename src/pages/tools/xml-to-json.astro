@@ -268,15 +268,19 @@ const faqSchema = {
     if (clearBtn) { clearBtn.addEventListener('click', () => {
       xmlInput.value = '';
       jsonOutput.value = '';
-      if (copyBtn) { copyBtn.classList.add('hidden');
-      errorOutput.classList.add('hidden');
+      if (copyBtn) {
+        copyBtn.classList.add('hidden');
+        errorOutput.classList.add('hidden');
+      }
     });
 
     function showError(message) {
       errorOutput.textContent = message;
       errorOutput.classList.remove('hidden');
-      jsonOutput.value = '';
-      if (copyBtn) { copyBtn.classList.add('hidden');
+      xmlOutput.value = '';
+      if (copyBtn) {
+        copyBtn.classList.add('hidden');
+      }
     }
   </script>
 </Layout>

@@ -281,8 +281,10 @@ const faqSchema = {
         const encoded = btoa(unescape(encodeURIComponent(input)));
         
         textOutput.value = encoded;
-        if (copyBtn) { copyBtn.classList.remove('hidden');
-        errorOutput.classList.add('hidden');
+        if (copyBtn) {
+          copyBtn.classList.remove('hidden');
+          errorOutput.classList.add('hidden');
+        }
 
       } catch (e) {
         showError(`Encoding error: ${e.message}`);
@@ -302,8 +304,10 @@ const faqSchema = {
         const decoded = decodeURIComponent(escape(atob(input)));
         
         textOutput.value = decoded;
-        if (copyBtn) { copyBtn.classList.remove('hidden');
-        errorOutput.classList.add('hidden');
+        if (copyBtn) {
+          copyBtn.classList.remove('hidden');
+          errorOutput.classList.add('hidden');
+        }
 
       } catch (e) {
         showError(`Invalid Base64 string: ${e.message}\n\nPlease check your input.`);
@@ -325,15 +329,19 @@ const faqSchema = {
     if (clearBtn) { clearBtn.addEventListener('click', () => {
       textInput.value = '';
       textOutput.value = '';
-      if (copyBtn) { copyBtn.classList.add('hidden');
-      errorOutput.classList.add('hidden');
+      if (copyBtn) {
+        copyBtn.classList.add('hidden');
+        errorOutput.classList.add('hidden');
+      }
     });
 
     function showError(message) {
       errorOutput.textContent = message;
       errorOutput.classList.remove('hidden');
       textOutput.value = '';
-      if (copyBtn) { copyBtn.classList.add('hidden');
+      if (copyBtn) {
+        copyBtn.classList.add('hidden');
+      }
     }
   </script>
 </Layout>

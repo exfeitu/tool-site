@@ -199,13 +199,17 @@ const faqSchema = {
       }
       
       uuidOutput.value = uuids.join('\n');
-      if (copyBtn) { copyBtn.classList.remove('hidden');
+      if (copyBtn) {
+        copyBtn.classList.remove('hidden');
+      }
     });
 
     if (clearBtn) { clearBtn.addEventListener('click', () => {
       uuidOutput.value = '';
       countInput.value = '1';
-      if (copyBtn) { copyBtn.classList.add('hidden');
+      if (copyBtn) {
+        copyBtn.classList.add('hidden');
+      }
     });
 
     if (copyBtn) { copyBtn.addEventListener('click', () => {

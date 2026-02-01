@@ -1,5 +1,7 @@
 ---
 const { title, description, keywords } = Astro.props;
+const plausibleDomain = 'tool-site-liart.vercel.app';
+const isProd = import.meta.env.PROD;
 ---
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -29,12 +31,8 @@ const { title, description, keywords } = Astro.props;
       gtag('config', 'G-4CN4VLSYPY');
     </script>
     
-    <!-- Privacy-friendly analytics by Plausible -->
-    <script async src="https://plausible.io/js/pa-Y4-Mt4zTg9VvmKuhd8Whh.js"></script>
-    <script is:inline>
-      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-      plausible.init()
-    </script>
+    <!-- Privacy-friendly analytics by Plausible (production only) -->
+    {isProd ? <script async defer data-domain={plausibleDomain} src="https://plausible.io/js/plausible.js"></script> : null}
     
     <!-- Structured Data (传递给子页面) -->
     <slot name="structured-data" />

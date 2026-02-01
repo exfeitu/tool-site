@@ -48,3 +48,12 @@ tool-site/
 
 参考 `keywords_day1.csv` 文件
 
+---
+
+## 📈 Analytics (Plausible) ✅
+
+- 已为站点配置 Plausible，域名：`tool-site-liart.vercel.app`。
+- 配置文件：`src/layouts/Layout.astro`（Plausible 脚本仅在生产环境加载，使用 `import.meta.env.PROD` 判定）。
+- 本地开发时不会加载 Plausible（避免测试噪音）。要验证：部署到 Vercel（或运行 `npm run build && npm run preview`），然后在 Plausible 仪表盘查看实时访客。
+- 如需自定义事件或更改 `data-domain`，告诉我要跟踪的域名或事件，我可以一起添加。
+

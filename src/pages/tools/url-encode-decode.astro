@@ -281,8 +281,10 @@ const faqSchema = {
         const encoded = encodeURIComponent(input);
         
         urlOutput.value = encoded;
-        if (copyBtn) { copyBtn.classList.remove('hidden');
-        errorOutput.classList.add('hidden');
+        if (copyBtn) {
+          copyBtn.classList.remove('hidden');
+          errorOutput.classList.add('hidden');
+        }
 
       } catch (e) {
         showError(`Encoding error: ${e.message}`);
@@ -302,8 +304,10 @@ const faqSchema = {
         const decoded = decodeURIComponent(input);
         
         urlOutput.value = decoded;
-        if (copyBtn) { copyBtn.classList.remove('hidden');
-        errorOutput.classList.add('hidden');
+        if (copyBtn) {
+          copyBtn.classList.remove('hidden');
+          errorOutput.classList.add('hidden');
+        }
 
       } catch (e) {
         showError(`Invalid URL-encoded string: ${e.message}\n\nPlease check your input.`);
@@ -325,15 +329,19 @@ const faqSchema = {
     if (clearBtn) { clearBtn.addEventListener('click', () => {
       urlInput.value = '';
       urlOutput.value = '';
-      if (copyBtn) { copyBtn.classList.add('hidden');
-      errorOutput.classList.add('hidden');
+      if (copyBtn) {
+        copyBtn.classList.add('hidden');
+        errorOutput.classList.add('hidden');
+      }
     });
 
     function showError(message) {
       errorOutput.textContent = message;
       errorOutput.classList.remove('hidden');
       urlOutput.value = '';
-      if (copyBtn) { copyBtn.classList.add('hidden');
+      if (copyBtn) {
+        copyBtn.classList.add('hidden');
+      }
     }
   </script>
 </Layout>

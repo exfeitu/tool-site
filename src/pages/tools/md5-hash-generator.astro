@@ -315,13 +315,17 @@ const faqSchema = {
       
       if (!input) {
         hashOutput.value = '';
-        if (copyBtn) { copyBtn.classList.add('hidden');
+        if (copyBtn) {
+          copyBtn.classList.add('hidden');
+        }
         return;
       }
 
       const hash = md5(input);
       hashOutput.value = hash;
-      if (copyBtn) { copyBtn.classList.remove('hidden');
+      if (copyBtn) {
+        copyBtn.classList.remove('hidden');
+      }
     });
 
     if (copyBtn) { copyBtn.addEventListener('click', () => {

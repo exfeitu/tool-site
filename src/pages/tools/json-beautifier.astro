@@ -290,8 +290,10 @@ const faqSchema = {
         const beautified = JSON.stringify(parsed, null, 2);
         
         jsonOutput.value = beautified;
-        if (copyBtn) { copyBtn.classList.remove('hidden');
-        errorOutput.classList.add('hidden');
+        if (copyBtn) {
+          copyBtn.classList.remove('hidden');
+          errorOutput.classList.add('hidden');
+        }
 
       } catch (e) {
         showError(`Invalid JSON: ${e.message}\n\nPlease check your JSON syntax.`);
@@ -312,8 +314,10 @@ const faqSchema = {
         const minified = JSON.stringify(parsed);
         
         jsonOutput.value = minified;
-        if (copyBtn) { copyBtn.classList.remove('hidden');
-        errorOutput.classList.add('hidden');
+        if (copyBtn) {
+          copyBtn.classList.remove('hidden');
+          errorOutput.classList.add('hidden');
+        }
 
       } catch (e) {
         showError(`Invalid JSON: ${e.message}\n\nPlease check your JSON syntax.`);
@@ -335,15 +339,19 @@ const faqSchema = {
     if (clearBtn) { clearBtn.addEventListener('click', () => {
       jsonInput.value = '';
       jsonOutput.value = '';
-      if (copyBtn) { copyBtn.classList.add('hidden');
-      errorOutput.classList.add('hidden');
+      if (copyBtn) {
+        copyBtn.classList.add('hidden');
+        errorOutput.classList.add('hidden');
+      }
     });
 
     function showError(message) {
       errorOutput.textContent = message;
       errorOutput.classList.remove('hidden');
       jsonOutput.value = '';
-      if (copyBtn) { copyBtn.classList.add('hidden');
+      if (copyBtn) {
+        copyBtn.classList.add('hidden');
+      }
     }
   </script>
 </Layout>
