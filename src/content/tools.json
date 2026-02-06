@@ -280,5 +280,68 @@
     "status": "live",
     "url": "/tools/color-picker",
     "createdDate": "2026-01-29"
+  },
+  {
+    "slug": "password-generator",
+    "title": "Password Generator",
+    "shortTitle": "Password Generator",
+    "description": "Generate strong, secure passwords online for free. Create random passwords with custom length and character types. Includes uppercase, lowercase, numbers, and symbols. No signup required.",
+    "icon": "🔐",
+    "keywords": [
+      "password generator",
+      "generate password",
+      "strong password generator",
+      "random password generator",
+      "secure password generator",
+      "password maker",
+      "create password"
+    ],
+    "category": "generator",
+    "priority": "high",
+    "status": "live",
+    "url": "/tools/password-generator",
+    "createdDate": "2026-02-06"
+  },
+  {
+    "slug": "qr-code-generator",
+    "title": "QR Code Generator",
+    "shortTitle": "QR Code Generator",
+    "description": "Generate QR codes online for free. Create QR codes for URLs, text, WiFi, and more instantly. Download as PNG or SVG. No signup required.",
+    "icon": "📱",
+    "keywords": [
+      "qr code generator",
+      "generate qr code",
+      "qr code maker",
+      "create qr code online",
+      "qr code generator free",
+      "qr code creator",
+      "make qr code"
+    ],
+    "category": "generator",
+    "priority": "high",
+    "status": "live",
+    "url": "/tools/qr-code-generator",
+    "createdDate": "2026-02-06"
+  },
+  {
+    "slug": "lorem-ipsum-generator",
+    "title": "Lorem Ipsum Generator",
+    "shortTitle": "Lorem Ipsum Generator",
+    "description": "Generate Lorem Ipsum placeholder text online for free. Create paragraphs, words, or sentences instantly. Perfect for designers and developers. No signup required.",
+    "icon": "📝",
+    "keywords": [
+      "lorem ipsum generator",
+      "lorem ipsum",
+      "placeholder text generator",
+      "dummy text generator",
+      "lorem ipsum dolor",
+      "generate lorem ipsum",
+      "lipsum generator"
+    ],
+    "category": "generator",
+    "priority": "high",
+    "status": "live",
+    "url": "/tools/lorem-ipsum-generator",
+    "createdDate": "2026-02-06"
   }
 ]

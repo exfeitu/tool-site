@@ -82,7 +82,7 @@ const faqSchema = {
         </div>
         <textarea
           id="json-input"
-          class="w-full h-80 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-y"
+          class="w-full h-[640px] p-4 border-2 border-gray-300 rounded-lg font-mono text-sm focus:border-blue-500 focus:outline-none resize-y"
           placeholder='[{"name":"Alice","age":30,"city":"New York"},{"name":"Bob","age":25,"city":"London"}]'
         ></textarea>
         <p class="text-xs text-gray-500 mt-1">
@@ -113,7 +113,7 @@ const faqSchema = {
         </div>
         <textarea
           id="csv-output"
-          class="w-full h-80 p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-y"
+          class="w-full h-[640px] p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-y"
           readonly
           placeholder="Your CSV output will appear here..."
         ></textarea>
@@ -274,7 +274,7 @@ const faqSchema = {
       
       if (!input) {
         csvOutput.value = 'Error: Please paste JSON data first';
-        if (downloadBtn) { downloadBtn.classList.add('hidden');
+        if (downloadBtn) { downloadBtn.classList.add('hidden'); }
         return;
       }
 
@@ -318,7 +318,7 @@ const faqSchema = {
 
         const csv = [header, ...rows].join('\n');
         csvOutput.value = csv;
-        if (downloadBtn) { downloadBtn.classList.remove('hidden');
+        if (downloadBtn) { downloadBtn.classList.remove('hidden'); }
 
         // 设置下载功能
         downloadBtn.onclick = () => {
@@ -332,18 +332,17 @@ const faqSchema = {
           document.body.removeChild(a);
           URL.revokeObjectURL(url);
         };
-
       } catch (e) {
         csvOutput.value = `Error: ${e.message}\n\nPlease check your JSON format.`;
-        if (downloadBtn) { downloadBtn.classList.add('hidden');
+        if (downloadBtn) { downloadBtn.classList.add('hidden'); }
       }
-    });
+    }); }
 
     if (clearBtn) { clearBtn.addEventListener('click', () => {
       jsonInput.value = '';
       csvOutput.value = '';
-      if (downloadBtn) { downloadBtn.classList.add('hidden');
-    });
+      if (downloadBtn) { downloadBtn.classList.add('hidden'); }
+    }); }
   </script>
 </Layout>
 

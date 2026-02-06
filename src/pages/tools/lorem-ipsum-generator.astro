@@ -1,0 +1,338 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const config = {
+  slug: 'lorem-ipsum-generator',
+  title: 'Lorem Ipsum Generator - Generate Placeholder Text Online Free',
+  description: 'Generate Lorem Ipsum placeholder text online for free. Create paragraphs, words, or sentences instantly. Perfect for designers and developers. No signup required.',
+  keywords: 'lorem ipsum generator, lorem ipsum, placeholder text generator, dummy text generator, lorem ipsum dolor, generate lorem ipsum, lipsum generator',
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Lorem Ipsum?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lorem Ipsum is placeholder text used in design and publishing. It's derived from Latin text and has been the industry standard since the 1500s."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to generate Lorem Ipsum text?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Select the number of paragraphs, words, or sentences you need and click 'Generate'. The Lorem Ipsum text will be created instantly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why use Lorem Ipsum?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lorem Ipsum is used as placeholder text to focus on design layout without being distracted by readable content. It has a natural distribution of letters."
+      }
+    }
+  ]
+};
+---
+
+<Layout title={config.title} description={config.description} keywords={config.keywords}>
+  <script type="application/ld+json">
+    {JSON.stringify(faqSchema)}
+  </script>
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-3">
+        📝 Lorem Ipsum Generator
+      </h1>
+      <p class="text-lg text-gray-600">
+        Generate Lorem Ipsum placeholder text instantly. Perfect for mockups, designs, and prototypes. Fast and free.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <div class="mb-6">
+        <div class="text-sm font-semibold text-gray-700 mb-3">
+          Generate:
+        </div>
+        <div class="flex gap-4 mb-4">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="type" value="paragraphs" checked class="w-4 h-4 text-blue-600">
+            <span class="text-gray-700">Paragraphs</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="type" value="sentences" class="w-4 h-4 text-blue-600">
+            <span class="text-gray-700">Sentences</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="radio" name="type" value="words" class="w-4 h-4 text-blue-600">
+            <span class="text-gray-700">Words</span>
+          </label>
+        </div>
+
+        <div class="flex gap-3 items-center mb-4">
+          <label class="text-sm font-semibold text-gray-700">
+            Count:
+          </label>
+          <input
+            id="count-input"
+            type="number"
+            min="1"
+            max="100"
+            value="5"
+            class="w-24 p-2 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+          />
+        </div>
+
+        <label class="flex items-center gap-2 cursor-pointer mb-6">
+          <input type="checkbox" id="start-lorem" checked class="w-4 h-4 text-blue-600 rounded">
+          <span class="text-sm text-gray-700">Start with "Lorem ipsum dolor sit amet..."</span>
+        </label>
+
+        <button
+          id="generate-btn"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-md"
+        >
+          📝 Generate Lorem Ipsum
+        </button>
+      </div>
+
+      <div>
+        <div class="block text-sm font-semibold text-gray-700 mb-2">
+          📄 Generated Text:
+        </div>
+        <textarea
+          id="lorem-output"
+          class="w-full h-[640px] p-4 border-2 border-gray-300 rounded-lg font-mono text-sm bg-gray-50 resize-y"
+          readonly
+          placeholder="Click 'Generate Lorem Ipsum' to create placeholder text..."
+        ></textarea>
+      </div>
+
+      <div class="flex gap-3 mt-4">
+        <button
+          id="copy-btn"
+          class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-md hidden"
+        >
+          📋 Copy to Clipboard
+        </button>
+        <button
+          id="clear-btn"
+          class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+        >
+          🗑️ Clear
+        </button>
+      </div>
+    </div>
+
+    <div class="bg-blue-50 rounded-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        What is Lorem Ipsum?
+      </h2>
+      <p class="text-gray-700 mb-3">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. It has been the industry's standard placeholder text since the 1500s.
+      </p>
+      <p class="text-gray-700">
+        It's used by designers and developers to fill content areas in mockups and prototypes, allowing focus on visual design without being distracted by meaningful content.
+      </p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        Common Use Cases
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <div class="font-semibold mb-2">🎨 Design Mockups</div>
+          <div class="text-sm">Fill layouts with realistic text length</div>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <div class="font-semibold mb-2">💻 Web Development</div>
+          <div class="text-sm">Test responsive designs and typography</div>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <div class="font-semibold mb-2">📱 App Prototypes</div>
+          <div class="text-sm">Demonstrate UI without final content</div>
+        </div>
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <div class="font-semibold mb-2">📄 Document Templates</div>
+          <div class="text-sm">Show formatting and layout structure</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">
+        Frequently Asked Questions
+      </h2>
+      <div class="space-y-4">
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">What is Lorem Ipsum?</h3>
+          <p class="text-gray-600">
+            Lorem Ipsum is placeholder text used in design and publishing. It's derived from Latin text and has been the industry standard since the 1500s.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">How to generate Lorem Ipsum text?</h3>
+          <p class="text-gray-600">
+            Select the number of paragraphs, words, or sentences you need and click 'Generate'. The Lorem Ipsum text will be created instantly.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">Why use Lorem Ipsum?</h3>
+          <p class="text-gray-600">
+            Lorem Ipsum is used as placeholder text to focus on design layout without being distracted by readable content. It has a natural distribution of letters.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">Where does Lorem Ipsum come from?</h3>
+          <p class="text-gray-600">
+            Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-semibold text-gray-900 mb-1">Is Lorem Ipsum copyright free?</h3>
+          <p class="text-gray-600">
+            Yes! Lorem Ipsum is in the public domain and can be used freely in any project without attribution or licensing concerns.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 rounded-lg p-6">
+      <h2 class="text-xl font-bold text-gray-900 mb-3">Related Tools</h2>
+      <div class="flex gap-3 flex-wrap">
+        <a href="/tools/password-generator" class="text-blue-600 hover:text-blue-800 font-medium">Password Generator</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/uuid-generator" class="text-blue-600 hover:text-blue-800 font-medium">UUID Generator</a>
+        <span class="text-gray-300">•</span>
+        <a href="/tools/json-beautifier" class="text-blue-600 hover:text-blue-800 font-medium">JSON Beautifier</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    const generateBtn = document.getElementById('generate-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const loremOutput = document.getElementById('lorem-output');
+    const countInput = document.getElementById('count-input');
+    const startLoremCheck = document.getElementById('start-lorem');
+
+    const words = [
+      'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
+      'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore',
+      'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud',
+      'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo',
+      'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate',
+      'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint',
+      'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia',
+      'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'
+    ];
+
+    const loremStart = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
+
+    function getRandomWord() {
+      return words[Math.floor(Math.random() * words.length)];
+    }
+
+    function generateSentence(wordCount = null) {
+      const count = wordCount || (5 + Math.floor(Math.random() * 10));
+      let sentence = [];
+      for (let i = 0; i < count; i++) {
+        sentence.push(getRandomWord());
+      }
+      sentence[0] = sentence[0].charAt(0).toUpperCase() + sentence[0].slice(1);
+      return sentence.join(' ') + '.';
+    }
+
+    function generateParagraph(sentenceCount = null) {
+      const count = sentenceCount || (3 + Math.floor(Math.random() * 4));
+      let paragraph = [];
+      for (let i = 0; i < count; i++) {
+        paragraph.push(generateSentence());
+      }
+      return paragraph.join(' ');
+    }
+
+    function generateLorem(type, count, startWithLorem) {
+      let result = [];
+
+      if (type === 'paragraphs') {
+        for (let i = 0; i < count; i++) {
+          if (i === 0 && startWithLorem) {
+            result.push(loremStart);
+          } else {
+            result.push(generateParagraph());
+          }
+        }
+        return result.join('\n\n');
+      } else if (type === 'sentences') {
+        for (let i = 0; i < count; i++) {
+          if (i === 0 && startWithLorem) {
+            result.push(loremStart);
+          } else {
+            result.push(generateSentence());
+          }
+        }
+        return result.join(' ');
+      } else if (type === 'words') {
+        if (startWithLorem) {
+          result.push('Lorem ipsum dolor sit amet');
+          count = Math.max(0, count - 5);
+        }
+        for (let i = 0; i < count; i++) {
+          result.push(getRandomWord());
+        }
+        return result.join(' ') + '.';
+      }
+    }
+
+    if (generateBtn) {
+      generateBtn.addEventListener('click', () => {
+        const type = document.querySelector('input[name="type"]:checked').value;
+        const count = parseInt(countInput.value) || 5;
+        const startWithLorem = startLoremCheck.checked;
+
+        const lorem = generateLorem(type, count, startWithLorem);
+        loremOutput.value = lorem;
+        
+        if (copyBtn) {
+          copyBtn.classList.remove('hidden');
+        }
+      });
+    }
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        loremOutput.select();
+        document.execCommand('copy');
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = '✅ Copied!';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+        }, 2000);
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        loremOutput.value = '';
+        countInput.value = '5';
+        if (copyBtn) {
+          copyBtn.classList.add('hidden');
+        }
+      });
+    }
+
+    // Generate initial text
+    window.addEventListener('DOMContentLoaded', () => {
+      generateBtn?.click();
+    });
+  </script>
+</Layout>
+
